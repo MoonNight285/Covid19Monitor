@@ -16,7 +16,7 @@
         <div class="col">
           <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#"><span id="web-title"><span id="web-title-enhance">코로나</span> 모니터</span></a>
+              <a class="navbar-brand" href="#"><span id="web-title"><span id="enhance1">코로나</span> 모니터</span></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                 <span class="navbar-toggler-icon"></span>
               </button>
