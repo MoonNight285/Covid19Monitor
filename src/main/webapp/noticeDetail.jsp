@@ -18,19 +18,12 @@
 <body>
     <jsp:include page="header.jsp"></jsp:include>
     <div class="container">
-        <div class="row mt-3">
+        <div class="row mt-5">
             <div class="col-sm-12 mx-auto d-flex justify-content-center">
                 <img src="img/advertisement.jpg" style="max-width: 100%; height: auto">
             </div>
         </div>
-        <div class="row my-3">
-            <div class="col-sm-12 mx-auto d-flex justify-content-end">
-                <button class="btn btn-primary">목록으로</button>
-                <button class="btn btn-primary mx-2">수정</button>
-                <button class="btn btn-primary">삭제</button>
-            </div>
-        </div>
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-sm-2 mx-auto">
                 <form class="form-floating">
                     <input type="text" class="form-control" id="posting-author" readonly>
@@ -73,9 +66,16 @@
         <div class="row mb-3">
             <div class="col-sm-12 mx-auto">
                 <div class="form-floating">
-                    <textarea id="posting-contents" class="form-control" style="height: 400px; resize:none" readonly></textarea>
+                    <textarea id="posting-contents" class="form-control" style="height: 350px; resize:none" readonly></textarea>
                     <label for="posting-contents">글 내용</label>
                 </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-sm-12 mx-auto d-flex justify-content-end">
+                <button class="btn btn-primary">목록으로</button>
+                <button class="btn btn-primary mx-2">수정</button>
+                <button class="btn btn-primary">삭제</button>
             </div>
         </div>
         <jsp:include page="footer.jsp"></jsp:include>
