@@ -1,0 +1,22 @@
+@font-face{
+    src: url("../font/BlackHanSans-Regular.ttf");
+    font-family: "BlackHanSans";
+}
+
+#web-title, .banner, #admin-tel, #admin-tel-num {
+    font-family: "BlackHanSans";
+}
+
+#web-title{
+    font-size: 28px;
+}
+
+#enhance1 {
+    color: #30E3CA;
+}
+
+.dropdown:hover .dropdown-menu {display:block;}
+
+body {
+    margin: 0px 0px;
+}

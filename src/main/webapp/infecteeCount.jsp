@@ -11,40 +11,16 @@
     <title>코로나 모니터 - 누적 감염자 수</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/commonDesign.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-        @font-face{
-            src: url("font/BlackHanSans-Regular.ttf");
-            font-family: "BlackHanSans";
-        }
-
-        #web-title, #data-name, #admin-tel, #admin-tel-num {
-            font-family: "BlackHanSans";
-        }
-
-        #web-title{
-            font-size: 28px;
-        }
-
-        #web-title-enhance {
-            color: #30E3CA;
-        }
-
-        .dropdown:hover .dropdown-menu {display:block;}
-
-        body {
-            margin: 0px 0px;
-        }
-    </style>
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
     <div class="container">
         <div class="row my-5">
             <div class="col-sm-4 mx-auto">
-                <h1 id="data-name" class="display-2">누적 확진자 수</h1>
+                <h1 class="display-2 banner">누적 확진자 수</h1>
             </div>
         </div>
         <div class="row mb-2">
@@ -73,10 +49,10 @@
         </div>
         <div class="row">
             <div class="col-sm-3 mx-auto mt-5">
-                <jsp:include page="sample/map.jsp"></jsp:include>
+                <jsp:include page="map.jsp"></jsp:include>
             </div>
             <div class="col-sm-5 mx-auto mb-5">
-                <jsp:include page="sample/chart.jsp"></jsp:include>
+                <jsp:include page="chart.jsp"></jsp:include>
             </div>
             <div class="col-sm-2 mx-auto"></div>
         </div>
