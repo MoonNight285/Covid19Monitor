@@ -73,9 +73,9 @@
         </div>
         <div class="row my-3">
             <div class="col-sm-12 mx-auto d-flex justify-content-end">
-                <button class="btn btn-primary">목록으로</button>
-                <button class="btn btn-primary mx-2">수정</button>
-                <button class="btn btn-primary">삭제</button>
+                <button class="btn btn-outline-dark">목록으로</button>
+                <button class="btn btn-outline-warning mx-2">수정</button>
+                <button class="btn btn-outline-danger">삭제</button>
             </div>
         </div>
         <jsp:include page="footer.jsp"></jsp:include>

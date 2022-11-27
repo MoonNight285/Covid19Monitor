@@ -21,7 +21,7 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- /Logo -->
-                        <h4 class="mb-2">비밀번호를 분실하셨나요?</h4>
+                        <h4 class="mb-2 text-center">비밀번호를 분실하셨나요?</h4>
                         <p class="mb-4">가입할때 입력했던 이메일을 기입하세요. 해당 이메일주소로 메일이 날라갑니다.</p>
                         <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
                             <div class="mb-3">

@@ -36,9 +36,9 @@
         </div>
         <div class="row my-2">
             <div class="col-sm-12 mx-auto d-flex justify-content-end">
-                <button class="btn btn-primary">FAQ</button>
-                <button class="btn btn-primary mx-2">공지사항</button>
-                <button class="btn btn-primary">글쓰기</button>
+                <button class="btn btn-outline-dark active">FAQ</button>
+                <button class="btn btn-outline-dark mx-2">공지사항</button>
+                <button class="btn btn-outline-success">글쓰기</button>
             </div>
         </div>
         <div class="row my-2">
@@ -46,7 +46,7 @@
             <div class="col-sm-4 mx-auto d-flex justify-content-end">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="검색할 제목을 입력" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <span class="input-group-text" id="basic-addon2">검색</span>
+                    <button type="button" class="btn btn-dark">검색</button>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 mx-auto d-flex justify-content-center">
-                <nav aria-label="Page navigation example">
+                <nav>
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">

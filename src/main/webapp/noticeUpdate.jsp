@@ -51,8 +51,8 @@
         </div>
         <div class="row my-3">
             <div class="col-sm-12 mx-auto d-flex justify-content-end">
-                <button class="btn btn-primary mx-2">수정취소</button>
-                <button class="btn btn-primary">수정</button>
+                <button class="btn btn-outline-danger mx-2">수정취소</button>
+                <button class="btn btn-outline-success">수정</button>
             </div>
         </div>
         <jsp:include page="footer.jsp"></jsp:include>
