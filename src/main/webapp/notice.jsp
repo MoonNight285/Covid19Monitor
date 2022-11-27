@@ -26,6 +26,16 @@
         </div>
         <div class="row my-2">
             <div class="col-sm-12 mx-auto d-flex justify-content-end">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        내가 작성한 글만 보기
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-sm-12 mx-auto d-flex justify-content-end">
                 <button class="btn btn-primary">FAQ</button>
                 <button class="btn btn-primary mx-2">공지사항</button>
                 <button class="btn btn-primary">글쓰기</button>
