@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>비밀번호 찾기 테스트</title>
+    <title>코로나 모니터 - 비밀번호 찾기</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -31,8 +31,7 @@
                             <button class="btn btn-primary d-grid w-100">이메일로 메세지 전송</button>
                         </form>
                         <div class="text-center">
-                            <a href="auth-login-basic.html" class="d-flex align-items-center justify-content-center">
-                                <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
+                            <a href="login.jsp" class="d-flex align-items-center justify-content-center">
                                 로그인 화면으로 돌아가기
                             </a>
                         </div>

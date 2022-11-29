@@ -29,7 +29,7 @@
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">비밀번호</label>
-                                <a href="auth-forgot-password-basic.html">
+                                <a href="forgotPassword.jsp">
                                     <small>비밀번호를 분실하셨나요?</small>
                                 </a>
                             </div>
@@ -51,7 +51,7 @@
 
                     <p class="text-center">
                         <span>아이디가 없으신가요?</span>
-                        <a href="auth-register-basic.html">
+                        <a href="join.jsp">
                             <span>회원가입</span>
                         </a>
                     </p>
