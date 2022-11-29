@@ -15,9 +15,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        window.addEventListener('hashchange', function () {
-            const cityName = location.href.split('#')[1];
-            const selectedCity = document.querySelector('#selected-city');
+        window.addEventListener("hashchange", function () {
+            const cityName = location.href.split("#")[1];
+            const selectedCity = document.querySelector("#selected-city");
             switch (cityName) {
                 case "seoul" :
                     selectedCity.value = "서울";
@@ -72,6 +72,39 @@
                     break;
             }
         });
+
+        $(document).ready(function () {
+            const btnSearch = $("#search");
+            btnSearch.on("click", function () {
+                const startTime = $("#start-time").val();
+                const endTime = $("#end-time").val();
+                const sDate = new Date(startTime);
+                const eDate = new Date(endTime);
+                const city = $("#selected-city").val();
+
+                if(isNaN(sDate.getFullYear()) || isNaN(eDate.getFullYear())) {
+                    alert("검색 시작일 또는 종료일이 비어있습니다.");
+                    return;
+                }
+
+                if(sDate >= eDate) {
+                    alert("검색 시작일은 종료일 보다 클수가 없습니다.");
+                    return;
+                }
+
+                $.ajax({
+                    url: "dataReceiver.jsp",
+                    type: "get",
+                    data: {dataType: "defCnt", startDate : startTime, selectedCity : city},
+                    success : function (data) {
+                        console.log(data);
+                    },
+                    error : function () {
+                        alert("서버와 통신이 실패했습니다.");
+                    }
+                });
+            });
+        });
     </script>
 </head>
 <body>
@@ -103,7 +136,7 @@
                 </div>
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 mt-2 mx-auto">
-                <button type="button" class="btn btn-outline-dark">조회</button>
+                <button id="search" type="button" class="btn btn-outline-dark">조회</button>
             </div>
         </div>
         <div class="row">
