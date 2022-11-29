@@ -14,6 +14,65 @@
     <link rel="stylesheet" href="css/commonDesign.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('hashchange', function () {
+            const cityName = location.href.split('#')[1];
+            const selectedCity = document.querySelector('#selected-city');
+            switch (cityName) {
+                case "seoul" :
+                    selectedCity.value = "서울";
+                    break;
+                case "gygg" :
+                    selectedCity.value = "경기";
+                    break;
+                case "incheon" :
+                    selectedCity.value = "인천";
+                    break;
+                case "gangwon" :
+                    selectedCity.value = "강원"
+                    break;
+                case "chungbuk" :
+                    selectedCity.value = "충북";
+                    break;
+                case "chungnam" :
+                    selectedCity.value = "충남";
+                    break;
+                case "daejeon" :
+                    selectedCity.value = "대전";
+                    break;
+                case "sejong" :
+                    selectedCity.value = "세종";
+                    break;
+                case "gwangju" :
+                    selectedCity.value = "광주";
+                    break;
+                case "jeonbuk" :
+                    selectedCity.value = "전북";
+                    break;
+                case "jeonnam" :
+                    selectedCity.value = "전남";
+                    break;
+                case "gyeongbuk" :
+                    selectedCity.value = "경북";
+                    break;
+                case "gyeongnam" :
+                    selectedCity.value = "경남";
+                    break;
+                case "daegu" :
+                    selectedCity.value = "대구";
+                    break;
+                case "busan" :
+                    selectedCity.value = "부산";
+                    break;
+                case "ulsan" :
+                    selectedCity.value = "울산";
+                    break;
+                case "jeju" :
+                    selectedCity.value = "제주";
+                    break;
+            }
+        });
+    </script>
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
@@ -27,7 +86,7 @@
             <div class="col-lg-4 col-xl-4 col-xxl-4"></div>
             <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="selected-city" readonly>
+                    <input type="text" class="form-control" id="selected-city" value="서울" readonly>
                     <label for="selected-city">선택한 도시 이름</label>
                 </div>
             </div>
