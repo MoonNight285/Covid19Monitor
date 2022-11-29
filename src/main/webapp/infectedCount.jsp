@@ -74,6 +74,9 @@
         });
 
         $(document).ready(function () {
+            const loading = $("#div_load_image");
+            loading.hide();
+
             const btnSearch = $("#search");
             btnSearch.on("click", function () {
                 const startTime = $("#start-time").val();
@@ -81,25 +84,39 @@
                 const sDate = new Date(startTime);
                 const eDate = new Date(endTime);
                 const city = $("#selected-city").val();
+                const daySpan = (eDate.getTime() - sDate.getTime()) / (1000*60*60*24);
 
                 if(isNaN(sDate.getFullYear()) || isNaN(eDate.getFullYear())) {
                     alert("검색 시작일 또는 종료일이 비어있습니다.");
                     return;
                 }
 
-                if(sDate >= eDate) {
+                if(sDate > eDate) {
                     alert("검색 시작일은 종료일 보다 클수가 없습니다.");
                     return;
                 }
 
+                if(daySpan >= 7) {
+                    alert("검색 범위는 최대 7일까지입니다.");
+                    return;
+                }
+
+                btnSearch.attr("disabled", "true");
+                loading.show();
                 $.ajax({
                     url: "dataReceiver.jsp",
                     type: "get",
-                    data: {dataType: "defCnt", startDate : startTime, selectedCity : city},
+                    data: {dataType: "defCnt", startDate : startTime, selectedCity : city, addDays : daySpan},
                     success : function (data) {
+                        loading.hide();
+                        btnSearch.attr("disabled", "false");
+                        btnSearch.removeAttr("disabled");
                         console.log(data);
                     },
                     error : function () {
+                        loading.hide();
+                        btnSearch.attr("disabled", "false");
+                        btnSearch.removeAttr("disabled");
                         alert("서버와 통신이 실패했습니다.");
                     }
                 });
@@ -107,7 +124,9 @@
         });
     </script>
 </head>
-<body>
+<body id="body">
+    <div class="spinner-border text-dark" id="div_load_image" style="position:absolute; top:45%; left:45%;width:100px;height:100px; z-index:9999; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; text-align:center">
+    </div>
     <jsp:include page="header.jsp"></jsp:include>
     <div class="container">
         <div class="row my-5">
