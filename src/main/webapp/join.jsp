@@ -22,7 +22,8 @@
             const idOverlapCheck = $("#id-overlap-check");
             const passwordEqualCheck = $("#password-equal-check");
             const nicknameOverlapCheck = $("#nickname-overlap-check");
-            const btnUserIdOvelapCheck = $("#btn-user-id-overlap-check");
+            const btnUserIdOverlapCheck = $("#btn-user-id-overlap-check");
+            const btnNicknameOverlapCheck = $("#btn-nickname-overlap-check");
 
             userId.on("change", function () {
                 const userIdValue = userId.val();
@@ -39,7 +40,7 @@
                 }
             });
 
-            btnUserIdOvelapCheck.on("click", function () {
+            btnUserIdOverlapCheck.on("click", function () {
                 if(userId.val() == "") {
                     idOverlapCheck.css("color", "red");
                     idOverlapCheck.text("아이디는 공백이 불가능합니다.");
@@ -78,8 +79,33 @@
                 }
             });
 
-            nickname.on("focusout", function () {
+            btnNicknameOverlapCheck.on("click", function () {
+                if(nickname.val() == "") {
+                    nicknameOverlapCheck.css("color", "red");
+                    nicknameOverlapCheck.text("닉네임은 공백이 불가능합니다.");
+                    return;
+                }
 
+                $.ajax({
+                    url : "joinNicknameOverlapChecker.jsp",
+                    type : "get",
+                    data : {name : nickname.val()},
+                    success : function (data) {
+                        let isOverlapNickname = JSON.parse(data);
+
+                        if(isOverlapNickname.overlap == "true") {
+                            nicknameOverlapCheck.css("color", "red");
+                            nicknameOverlapCheck.text("이미 사용중인 닉네임입니다.");
+                        } else {
+                            nicknameOverlapCheck.css("color", "green");
+                            nicknameOverlapCheck.text("사용가능한 닉네임입니다.");
+                        }
+                    },
+                    error : function () {
+                        nicknameOverlapCheck.css("color", "red");
+                        nicknameOverlapCheck.text("문제가 발생했습니다. 다시 시도하세요.");
+                    }
+                });
             });
         });
     </script>
