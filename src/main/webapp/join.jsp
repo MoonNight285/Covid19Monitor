@@ -13,6 +13,76 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const userId = $("#user-id");
+            const password = $("#password");
+            const passwordCheck = $("#password-check");
+            const nickname = $("#nickname");
+            const idOverlapCheck = $("#id-overlap-check");
+            const passwordEqualCheck = $("#password-equal-check");
+            const nicknameOverlapCheck = $("#nickname-overlap-check");
+            const btnUserIdOvelapCheck = $("#btn-user-id-overlap-check");
+
+            userId.on("change", function () {
+                const userIdValue = userId.val();
+                for(let i = 0; i < userIdValue.length; ++i) {
+                    if(((userIdValue.charCodeAt(i) >= 65 && userIdValue.charCodeAt(i) <= 90) ||
+                        (userIdValue.charCodeAt(i) >= 97 && userIdValue.charCodeAt(i) <= 122) ||
+                        (userIdValue.charCodeAt(i) >= 48 && userIdValue.charCodeAt(i) <= 57))) {
+
+                    } else {
+                        userId.val("");
+                        idOverlapCheck.css("color", "red");
+                        idOverlapCheck.text("아이디는 영어와 숫자만 가능합니다.");
+                    }
+                }
+            });
+
+            btnUserIdOvelapCheck.on("click", function () {
+                if(userId.val() == "") {
+                    idOverlapCheck.css("color", "red");
+                    idOverlapCheck.text("아이디는 공백이 불가능합니다.");
+                    return;
+                }
+
+                $.ajax({
+                    url : "joinUserIdOverlapChecker.jsp",
+                    type : "get",
+                    data : {id : userId.val()},
+                    success : function (data) {
+                        let isOverlapId = JSON.parse(data);
+
+                        if(isOverlapId.overlap == "true") {
+                            idOverlapCheck.css("color", "red");
+                            idOverlapCheck.text("이미 사용중인 아이디입니다.");
+                        } else {
+                            idOverlapCheck.css("color", "green");
+                            idOverlapCheck.text("사용가능한 아이디입니다.");
+                        }
+                    },
+                    error : function () {
+                        idOverlapCheck.css("color", "red");
+                        idOverlapCheck.text("문제가 발생했습니다. 다시 시도하세요.");
+                    }
+                });
+            });
+
+            passwordCheck.on("focusout", function () {
+                if(password.val() == passwordCheck.val()) {
+                    passwordEqualCheck.css("color", "green");
+                    passwordEqualCheck.text("암호가 일치합니다.");
+                } else {
+                    passwordEqualCheck.css("color", "red");
+                    passwordEqualCheck.text("암호가 일치하지않습니다.");
+                }
+            });
+
+            nickname.on("focusout", function () {
+
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -26,9 +96,12 @@
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between">
                                     <label for="user-id" class="form-label">아이디</label>
-                                    <small>사용할수있는 아이디입니다.</small>
+                                    <small id="id-overlap-check"></small>
                                 </div>
-                                <input type="text" class="form-control" id="user-id" name="userId" placeholder="아이디를 입력하세요." autofocus/>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="user-id" name="userId" placeholder="아이디를 입력하세요." autofocus/>
+                                    <button class="btn btn-outline-dark" id="btn-user-id-overlap-check" type="button">중복확인</button>
+                                </div>
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
@@ -43,7 +116,7 @@
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="password-check">비밀번호 확인</label>
-                                    <small>암호가 일치합니다.</small>
+                                    <small id="password-equal-check"></small>
                                 </div>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password-check" class="form-control" name="passwordCheck"
@@ -54,9 +127,12 @@
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between">
                                     <label for="nickname" class="form-label">닉네임</label>
-                                    <small>사용할수있는 닉네임입니다.</small>
+                                    <small id="nickname-overlap-check"></small>
                                 </div>
-                                <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임을 입력하세요."/>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임을 입력하세요."/>
+                                    <button class="btn btn-outline-dark" id="btn-nickname-overlap-check" type="button">중복확인</button>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between">
