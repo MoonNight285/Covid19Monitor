@@ -74,17 +74,24 @@
         });
 
         $(document).ready(function () {
+            let isFirstClick = true;
             const loading = $("#div_load_image");
             loading.hide();
 
+            const btnHiddenSearch = $("#btnHiddenSearch");
             const btnSearch = $("#search");
             btnSearch.on("click", function () {
                 const startTime = $("#start-time").val();
                 const endTime = $("#end-time").val();
                 const sDate = new Date(startTime);
                 const eDate = new Date(endTime);
-                const city = $("#selected-city").val();
                 const daySpan = (eDate.getTime() - sDate.getTime()) / (1000*60*60*24);
+                const selectedCity = $("#selected-city").val();
+
+                if(selectedCity == "null") {
+                    alert("선택한 시도명이 비어있습니다.");
+                    return;
+                }
 
                 if(isNaN(sDate.getFullYear()) || isNaN(eDate.getFullYear())) {
                     alert("검색 시작일 또는 종료일이 비어있습니다.");
@@ -101,8 +108,15 @@
                     return;
                 }
 
-                //btnSearch.attr("disabled", "true");
-                //loading.show();
+                if(isFirstClick == false) {
+                    alert("이미 조회중입니다. 잠시만 기다려주세요...");
+                    return;
+                } else {
+                    isFirstClick = false;
+                }
+
+                loading.show();
+                btnHiddenSearch.click();
             });
         });
     </script>
@@ -122,24 +136,26 @@
                 <div class="col-lg-4 col-xl-4 col-xxl-4"></div>
                 <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="selected-city" name="selectedCity" value="서울" readonly>
-                        <label for="selected-city">선택한 도시 이름</label>
+                        <input type="text" class="form-control" id="selected-city" name="selectedCity"
+                               value="<%=request.getParameter("selectedCity")%>" readonly>
+                        <label for="selected-city">선택한 시도명</label>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="start-time" name="startDate">
+                        <input type="date" class="form-control" id="start-time" name="startDate" value="<%=request.getParameter("startDate")%>">
                         <label for="start-time">조회 시작시간</label>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="end-time" name="endDate">
+                        <input type="date" class="form-control" id="end-time" name="endDate" value="<%=request.getParameter("endDate")%>">
                         <label class="form-label" for="end-time">조회 종료시간</label>
                     </div>
                 </div>
                 <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 mt-2 mx-auto">
-                    <button id="search" type="submit" class="btn btn-outline-dark">조회</button>
+                    <button id="search" type="button" class="btn btn-outline-dark">조회</button>
+                    <button id="btnHiddenSearch" type="submit" style="display: none"></button>
                 </div>
             </div>
         </form>
@@ -160,6 +176,8 @@
                     <jsp:param name="date3" value='<%=request.getParameter("date3")%>'/>
                     <jsp:param name="date4" value='<%=request.getParameter("date4")%>'/>
                     <jsp:param name="date5" value='<%=request.getParameter("date5")%>'/>
+
+                    <jsp:param name="selectedCity" value='<%=request.getParameter("selectedCity")%>'/>
                 </jsp:include>
             </div>
         </div>

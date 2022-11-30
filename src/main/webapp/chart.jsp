@@ -23,7 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div style="max-width: 100%; height: auto">
+    <div style="max-width: 900px; height: 475px">
         <canvas id="myChart"></canvas>
     </div>
     <input id="data1" type="hidden" value='<%=request.getParameter("data1")%>'>
@@ -31,11 +31,14 @@
     <input id="data3" type="hidden" value='<%=request.getParameter("data3")%>'>
     <input id="data4" type="hidden" value='<%=request.getParameter("data4")%>'>
     <input id="data5" type="hidden" value='<%=request.getParameter("data5")%>'>
+
     <input id="date1" type="hidden" value="<%=dates[0]%>">
     <input id="date2" type="hidden" value="<%=dates[1]%>">
     <input id="date3" type="hidden" value="<%=dates[2]%>">
     <input id="date4" type="hidden" value="<%=dates[3]%>">
     <input id="date5" type="hidden" value="<%=dates[4]%>">
+
+    <input id="selected-city" type="hidden" value="<%=request.getParameter("selectedCity")%>">
 </body>
 
 <script>
@@ -53,12 +56,14 @@
     const date4 = document.getElementById('date4').value;
     const date5 = document.getElementById('date5').value;
 
+    const city = document.getElementById('selected-city').value;
+
     new Chart(ctx, {
         type: 'bar',
         data: {
             labels: [date1, date2, date3, date4, date5],
             datasets: [{
-                label: '# of Votes',
+                label: "누적 확진자 수(" + city + ")",
                 data: [data1, data2, data3, data4, data5],
                 borderWidth: 1
             }]

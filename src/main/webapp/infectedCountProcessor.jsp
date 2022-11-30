@@ -86,4 +86,8 @@
     <jsp:param name="date3" value="<%=labelDate[2]%>"/>
     <jsp:param name="date4" value="<%=labelDate[3]%>"/>
     <jsp:param name="date5" value="<%=labelDate[4]%>"/>
+
+    <jsp:param name="selectedCity" value="<%=selectedCity%>"/>
+    <jsp:param name="startDate" value="<%=startDate%>"/>
+    <jsp:param name="endDate" value="<%=endDate%>"/>
 </jsp:forward>
