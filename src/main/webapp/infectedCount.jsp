@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Calendar" %><%--
   Created by IntelliJ IDEA.
   User: kimjy
   Date: 2022-11-26
@@ -96,30 +96,13 @@
                     return;
                 }
 
-                if(daySpan >= 7) {
-                    alert("검색 범위는 최대 7일까지입니다.");
+                if(daySpan > 4) {
+                    alert("검색 범위는 당일포함 최대 5일까지입니다.");
                     return;
                 }
 
-                btnSearch.attr("disabled", "true");
-                loading.show();
-                $.ajax({
-                    url: "dataReceiver.jsp",
-                    type: "get",
-                    data: {dataType: "defCnt", startDate : startTime, selectedCity : city, addDays : daySpan},
-                    success : function (data) {
-                        loading.hide();
-                        btnSearch.attr("disabled", "false");
-                        btnSearch.removeAttr("disabled");
-                        console.log(data);
-                    },
-                    error : function () {
-                        loading.hide();
-                        btnSearch.attr("disabled", "false");
-                        btnSearch.removeAttr("disabled");
-                        alert("서버와 통신이 실패했습니다.");
-                    }
-                });
+                //btnSearch.attr("disabled", "true");
+                //loading.show();
             });
         });
     </script>
@@ -134,36 +117,50 @@
                 <h1 class="display-2 banner">누적 확진자 수</h1>
             </div>
         </div>
-        <div class="row mb-2">
-            <div class="col-lg-4 col-xl-4 col-xxl-4"></div>
-            <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="selected-city" value="서울" readonly>
-                    <label for="selected-city">선택한 도시 이름</label>
+        <form action="infectedCountProcessor.jsp" method="get">
+            <div class="row mb-2">
+                <div class="col-lg-4 col-xl-4 col-xxl-4"></div>
+                <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="selected-city" name="selectedCity" value="서울" readonly>
+                        <label for="selected-city">선택한 도시 이름</label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="start-time" name="startDate">
+                        <label for="start-time">조회 시작시간</label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="end-time" name="endDate">
+                        <label class="form-label" for="end-time">조회 종료시간</label>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 mt-2 mx-auto">
+                    <button id="search" type="submit" class="btn btn-outline-dark">조회</button>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
-                <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="start-time">
-                    <label for="start-time">조회 시작시간</label>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
-                <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="end-time">
-                    <label class="form-label" for="start-time">조회 종료시간</label>
-                </div>
-            </div>
-            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 mt-2 mx-auto">
-                <button id="search" type="button" class="btn btn-outline-dark">조회</button>
-            </div>
-        </div>
+        </form>
         <div class="row">
             <div class="col-sm-12 col-lg-3 col-xl-4 col-xxl-4 mx-auto mt-5">
                 <jsp:include page="map.jsp"></jsp:include>
             </div>
             <div class="col-sm-12 col-lg-9 col-xl-8 col-xxl-8 mx-auto mb-5">
-                <jsp:include page="chart.jsp"></jsp:include>
+                <jsp:include page="chart.jsp">
+                    <jsp:param name="data1" value='<%=request.getParameter("data1")%>'/>
+                    <jsp:param name="data2" value='<%=request.getParameter("data2")%>'/>
+                    <jsp:param name="data3" value='<%=request.getParameter("data3")%>'/>
+                    <jsp:param name="data4" value='<%=request.getParameter("data4")%>'/>
+                    <jsp:param name="data5" value='<%=request.getParameter("data5")%>'/>
+
+                    <jsp:param name="date1" value='<%=request.getParameter("date1")%>'/>
+                    <jsp:param name="date2" value='<%=request.getParameter("date2")%>'/>
+                    <jsp:param name="date3" value='<%=request.getParameter("date3")%>'/>
+                    <jsp:param name="date4" value='<%=request.getParameter("date4")%>'/>
+                    <jsp:param name="date5" value='<%=request.getParameter("date5")%>'/>
+                </jsp:include>
             </div>
         </div>
         <jsp:include page="footer.jsp"></jsp:include>
