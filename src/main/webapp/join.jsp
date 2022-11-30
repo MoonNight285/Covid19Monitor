@@ -19,11 +19,15 @@
             const password = $("#password");
             const passwordCheck = $("#password-check");
             const nickname = $("#nickname");
+            const tel = $("#tel");
+            const email = $("#email");
             const idOverlapCheck = $("#id-overlap-check");
             const passwordEqualCheck = $("#password-equal-check");
             const nicknameOverlapCheck = $("#nickname-overlap-check");
             const btnUserIdOverlapCheck = $("#btn-user-id-overlap-check");
             const btnNicknameOverlapCheck = $("#btn-nickname-overlap-check");
+            const btnJoin = $("#btn-join");
+            const btnHiddenJoin = $("#btn-hidden-join");
 
             userId.on("change", function () {
                 const userIdValue = userId.val();
@@ -70,7 +74,7 @@
             });
 
             passwordCheck.on("focusout", function () {
-                if(password.val() == passwordCheck.val()) {
+                if(password.val() == passwordCheck.val() && password.val() != "") {
                     passwordEqualCheck.css("color", "green");
                     passwordEqualCheck.text("암호가 일치합니다.");
                 } else {
@@ -107,6 +111,35 @@
                     }
                 });
             });
+
+            btnJoin.on("click", function () {
+                if (idOverlapCheck.css("color") == "rgb(255, 0, 0)") {
+                    alert("아이디 중복확인을 해주세요!");
+                    return;
+                }
+
+                if (passwordEqualCheck.css("color") == "rgb(255, 0, 0)") {
+                    alert("비밀번호가 일치하지않습니다!");
+                    return;
+                }
+
+                if (nicknameOverlapCheck.css("color") == "rgb(255, 0, 0)") {
+                    alert("닉네임 중복확인을 해주세요!");
+                    return;
+                }
+
+                if (tel.val() == "") {
+                    alert("전화번호가 비어있습니다!");
+                    return;
+                }
+
+                if (email.val() == "") {
+                    alert("이메일이 비어있습니다!");
+                    return;
+                }
+
+                btnHiddenJoin.click();
+            });
         });
     </script>
 </head>
@@ -122,7 +155,7 @@
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between">
                                     <label for="user-id" class="form-label">아이디</label>
-                                    <small id="id-overlap-check"></small>
+                                    <small id="id-overlap-check" style="color: red"></small>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="user-id" name="userId" placeholder="아이디를 입력하세요." autofocus/>
@@ -142,7 +175,7 @@
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="password-check">비밀번호 확인</label>
-                                    <small id="password-equal-check"></small>
+                                    <small id="password-equal-check" style="color: red"></small>
                                 </div>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password-check" class="form-control" name="passwordCheck"
@@ -153,7 +186,7 @@
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between">
                                     <label for="nickname" class="form-label">닉네임</label>
-                                    <small id="nickname-overlap-check"></small>
+                                    <small id="nickname-overlap-check" style="color: red"></small>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임을 입력하세요."/>
@@ -173,7 +206,8 @@
                                 <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요.">
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">회원가입</button>
+                                <button id="btn-join" class="btn btn-primary d-grid w-100" type="button">회원가입</button>
+                                <button id="btn-hidden-join" type="submit" style="display: none"></button>
                             </div>
                         </form>
                     </div>

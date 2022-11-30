@@ -35,5 +35,9 @@
         if (conn != null) { conn.close(); }
     }
 
-    System.out.println(result);
+    if(result == 1) {
+        response.sendRedirect("joinSuccess.jsp");
+    } else {
+        // 실패시 실패한 페이지 보여줘야함
+    }
 %>

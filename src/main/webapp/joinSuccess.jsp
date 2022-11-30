@@ -21,6 +21,12 @@
     </style>
 </head>
 <body>
-    <a href="infectedCount.jsp"><img src="img/joinSuccess.jpg"></a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-auto">
+                <a href="infectedCount.jsp"><img src="img/joinSuccess.jpg"></a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
