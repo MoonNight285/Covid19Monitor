@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="mb-2 text-center">회원가입</h4>
-                        <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                        <form id="formAuthentication" class="mb-3" action="joinProcessor.jsp" method="POST">
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between">
                                     <label for="user-id" class="form-label">아이디</label>
