@@ -140,7 +140,7 @@
                                         String postingAuthor = rs.getString("posting_author");
                                         String postingCreateTime = rs.getString("posting_create_time");
                             %>
-                            <tr>
+                            <tr onclick="location.href='noticeDetail.jsp?idx=<%=idx%>'" style="cursor: hand">
                                 <td><%=idx%></td>
                                 <td><%=postingName%></td>
                                 <td><%=postingAuthor%></td>
