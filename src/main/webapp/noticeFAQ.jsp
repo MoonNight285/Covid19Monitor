@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="sqlConnector.jsp"%>
 <html>
 <head>
     <title>코로나 모니터 - FAQ & 공지사항</title>
@@ -14,6 +15,21 @@
     <link rel="stylesheet" href="css/commonDesign.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const btnFAQ = $("#btn-FAQ");
+            const btnNotice = $("#btn-notice");
+            const btnWrite = $("#btn-write");
+
+            btnFAQ.on("click", function () {
+
+            });
+
+            btnNotice.on("click", function () {
+
+            });
+        });
+    </script>
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
@@ -36,9 +52,9 @@
         </div>
         <div class="row my-2">
             <div class="col-sm-12 mx-auto d-flex justify-content-end">
-                <button class="btn btn-outline-dark active">FAQ</button>
-                <button class="btn btn-outline-dark mx-2">공지사항</button>
-                <button class="btn btn-outline-success">글쓰기</button>
+                <button id="btn-FAQ" class="btn btn-outline-dark active">FAQ</button>
+                <button id="btn-notice" class="btn btn-outline-dark mx-2">공지사항</button>
+                <button id="btn-write" class="btn btn-outline-success">글쓰기</button>
             </div>
         </div>
         <div class="row my-2">
@@ -62,48 +78,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>테스트 제목1</td>
-                            <td>작성자1</td>
-                            <td>2022-11-27</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>테스트 제목1</td>
-                            <td>작성자1</td>
-                            <td>2022-11-27</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>테스트 제목1</td>
-                            <td>작성자1</td>
-                            <td>2022-11-27</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>테스트 제목1</td>
-                            <td>작성자1</td>
-                            <td>2022-11-27</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>테스트 제목1</td>
-                            <td>작성자1</td>
-                            <td>2022-11-27</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>테스트 제목1</td>
-                            <td>작성자1</td>
-                            <td>2022-11-27</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>테스트 제목1</td>
-                            <td>작성자1</td>
-                            <td>2022-11-27</td>
-                        </tr>
+<%--                        <%--%>
+<%--                            PreparedStatement psmt = null;--%>
+<%--                            ResultSet rs = null;--%>
+<%--                            String query = "SELECT idx, posting_name, posting_author, posting_create_time FROM posting " +--%>
+<%--                                    "WHERE posting_type = ? ";--%>
+
+<%--                            try {--%>
+<%--                                psmt = conn.prepareStatement(query);--%>
+<%--                                --%>
+<%--                            } catch (SQLException ex) {--%>
+<%--                                ex.printStackTrace();--%>
+<%--                                throw new SQLException();--%>
+<%--                            } finally {--%>
+
+<%--                            }--%>
+<%--                        %>--%>
                     </tbody>
                 </table>
             </div>

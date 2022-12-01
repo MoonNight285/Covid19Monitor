@@ -56,7 +56,7 @@
                     </ul>
                   </div>
                   <li class="nav-item">
-                    <a class="nav-link" href="notice.jsp">FAQ & 공지사항</a>
+                    <a class="nav-link" href="noticeFAQ.jsp">FAQ & 공지사항</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="<%=loginOutPath%>"><%=labelLogin%></a>
