@@ -15,6 +15,10 @@
     color: #30E3CA;
 }
 
+#enhance2 {
+    color : forestgreen;
+}
+
 .dropdown:hover .dropdown-menu {display:block;}
 
 body {

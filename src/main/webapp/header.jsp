@@ -6,6 +6,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+    String nickname = "";
+    String labelLogin = "관리자 로그인";
+    String loginOutPath = "login.jsp";
+    Object obj = session.getAttribute("nickname");
+    if (obj != null) {
+        nickname = obj.toString() + "님 환영합니다!";
+        labelLogin = "로그아웃";
+        loginOutPath = "logout.jsp";
+    }
+%>
 <html>
 <head>
     <title>Title</title>
@@ -16,12 +28,15 @@
         <div class="col">
           <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#"><span id="web-title"><span id="enhance1">코로나</span> 모니터</span></a>
+              <a class="navbar-brand" href="infectedCount.jsp"><span id="web-title"><span id="enhance1">코로나</span> 모니터</span></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                 <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" id="user-nickname"><%=nickname%></a>
+                  </li>
                   <div class="collapse navbar-collapse" id="data-option">
                     <ul class="navbar-nav">
                       <li class="nav-item dropdown">
@@ -44,7 +59,7 @@
                     <a class="nav-link" href="notice.jsp">FAQ & 공지사항</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">관리자 로그인</a>
+                    <a class="nav-link" href="<%=loginOutPath%>"><%=labelLogin%></a>
                   </li>
                 </ul>
               </div>

@@ -12,6 +12,50 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const btnLogin = $("#btn-login");
+            const btnHiddenLogin = $("#btn-hidden-login");
+
+            btnLogin.on("click", function () {
+                const userId = $("#user-id").val();
+                const password = $("#password").val();
+                const loginResult = $("#login-result");
+
+                if (userId == "") {
+                    loginResult.css("color", "red");
+                    loginResult.text("아이디가 비어있습니다!");
+                    return;
+                }
+
+                if (password == "") {
+                    loginResult.css("color", "red");
+                    loginResult.text("비밀번호가 비어있습니다!");
+                    return;
+                }
+
+                $.ajax({
+                    url : "loginChecker.jsp",
+                    type : "post",
+                    data : {Id : userId, pwd : password},
+                    success : function (data) {
+                        let result = JSON.parse(data);
+
+                        if(result.isExist == "true") {
+                            btnHiddenLogin.click();
+                        } else {
+                            loginResult.css("color", "red");
+                            loginResult.text("유저정보가 일치하지않습니다!");
+                        }
+                    },
+                    error : function () {
+                        loginResult.css("color", "red");
+                        loginResult.text("문제가 발생했습니다. 다시 시도하세요.");
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -21,10 +65,10 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-2 text-center">관리자 로그인</h4>
-                    <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                    <form id="formAuthentication" class="mb-3" action="loginProcessor.jsp" method="POST">
                         <div class="mb-3">
-                            <label for="email" class="form-label">아이디</label>
-                            <input type="text" class="form-control" id="email" name="email-username" placeholder="아이디를 입력하세요." autofocus/>
+                            <label for="user-id" class="form-label">아이디</label>
+                            <input type="text" class="form-control" id="user-id" name="userId" placeholder="아이디를 입력하세요." autofocus/>
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
@@ -38,14 +82,17 @@
                                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-flex justify-content-between">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me" />
+                                <input class="form-check-input" type="checkbox" id="remember-me" name="autoLogin">
                                 <label class="form-check-label" for="remember-me">자동 로그인</label>
                             </div>
+                            <small id="login-result">아이디가 존재하지않습니다.</small>
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-primary d-grid w-100" type="submit">로그인</button>
+                            <button id="btn-login" class="btn btn-primary d-grid w-100" type="button">로그인</button>
+                            <button id="btn-hidden-login" type="submit" style="display: none"></button>
+                            <input type="hidden" name="preUrl" value="<%=request.getHeader("referer")%>">
                         </div>
                     </form>
 
