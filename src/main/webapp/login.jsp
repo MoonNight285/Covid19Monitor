@@ -87,7 +87,7 @@
                                 <input class="form-check-input" type="checkbox" id="remember-me" name="autoLogin">
                                 <label class="form-check-label" for="remember-me">자동 로그인</label>
                             </div>
-                            <small id="login-result">아이디가 존재하지않습니다.</small>
+                            <small id="login-result"></small>
                         </div>
                         <div class="mb-3">
                             <button id="btn-login" class="btn btn-primary d-grid w-100" type="button">로그인</button>
