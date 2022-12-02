@@ -13,20 +13,19 @@
     String contentType = request.getParameter("contentType");
     String searchTitle = request.getParameter("searchTitle");
     String query = "";
-    String noticeCountSelectQuery = "SELECT MOD(COUNT(*),5) FROM posting "; // 한페이지에 최대 5개씩 보여준다.
 
     if (searchTitle != null && contentType.equals("FAQ")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
-                "WHERE posting_type = 'F' AND posting_name LIKE '%" + searchTitle + "%' ";
+                "WHERE posting_type = 'F' AND posting_name LIKE '%" + searchTitle + "%' LIMIT 0, 9 ";
     } else if (searchTitle == null && contentType.equals("FAQ")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
-                "WHERE posting_type = 'F'";
+                "WHERE posting_type = 'F' LIMIT 0, 9 ";
     } else if (searchTitle != null && contentType.equals("Notice")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
-                "WHERE posting_type = 'N' AND posting_name LIKE '%" + searchTitle + "%' ";
+                "WHERE posting_type = 'N' AND posting_name LIKE '%" + searchTitle + "%' LIMIT 0, 9 ";
     } else if (searchTitle == null && contentType.equals("Notice")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
-                "WHERE posting_type = 'N'";
+                "WHERE posting_type = 'N' LIMIT 0, 9 ";
     }
 %>
 
@@ -194,13 +193,20 @@
                                     PreparedStatement psmt2 = null;
                                     ResultSet rs2 = null;
                                     int noticeCount = 0;
+                                    String noticeCountSelectQuery = "";
+                                    
+                                    if (contentType.equals("FAQ")) {
+                                        noticeCountSelectQuery = "SELECT COUNT(*) FROM posting WHERE posting_type = 'F' ";
+                                    } else if (contentType.equals("Notice")) {
+                                        noticeCountSelectQuery = "SELECT COUNT(*) FROM posting WHERE posting_type = 'N' ";
+                                    }
                                     
                                     try {
                                         psmt2 = conn.prepareStatement(noticeCountSelectQuery);
                                         rs2 = psmt2.executeQuery();
                                         
                                         if (rs2.next()) {
-                                            noticeCount = rs2.getInt("MOD(COUNT(*),5)");
+                                            noticeCount = rs2.getInt("COUNT(*)");
                                         }
                                     } catch (SQLException ex) {
                                         ex.printStackTrace();
@@ -211,7 +217,12 @@
                                         if (conn != null) { conn.close(); }
                                     }
                                     
-                                    for (int i = 0; i < noticeCount; ++i) {
+                                    int addNumber = 1; // 한 페이지에 최대 9개 표시되는데 딱 맞춰서 게시물수가 떨어지면 값 보정
+                                    if (noticeCount % 9 == 0) {
+                                        addNumber = 0;
+                                    }
+                                    
+                                    for (int i = 0; i < noticeCount / 9 + addNumber; ++i) {
                                 %>
                                 <li class="page-item"><a class="page-link" href="#"><%=i + 1%></a></li>
                                 <%
