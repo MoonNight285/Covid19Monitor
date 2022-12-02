@@ -85,6 +85,22 @@
                         sendForm.attr("method", "get");
                     }
                 });
+                
+                btnWrite.on("click", function () {
+                    const loginNickname = "<%=session.getAttribute("nickname")%>";
+                    const userNickname = $("#header-user-nickname").text();
+                    
+                    if (userNickname == "") {
+                        sendForm.attr("action", "login.jsp");
+                        sendForm.attr("method", "get");
+                    }
+                    
+                    if (loginNickname == userNickname) {
+                        sendForm.attr("action", "noticeCreate.jsp");
+                        sendForm.attr("method", "get");
+                    }
+                    
+                });
             });
         </script>
     </head>
