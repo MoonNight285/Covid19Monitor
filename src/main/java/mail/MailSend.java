@@ -14,10 +14,24 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailSend {
+    private String toAddress;
+    private String msgTitle;
+    private String msgContent;
+
+    public MailSend() {
+
+    }
+
+    public MailSend(String toAddress, String msgTitle, String msgContent) {
+        this.toAddress = toAddress;
+        this.msgTitle = msgTitle;
+        this.msgContent = msgContent;
+    }
+
     public void MailSend() {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
-        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.host", "smtp.naver.com");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.port", "587");
         
@@ -30,11 +44,11 @@ public class MailSend {
         try {
             msg.setSentDate(new Date());
             
-            msg.setFrom(new InternetAddress("kimjyjh321@gmail.com", "VISITOR"));
-            InternetAddress to = new InternetAddress("kimjyjh123@gmail.com");
+            msg.setFrom(new InternetAddress("subbackya77@naver.com", "코로나 모니터"));
+            InternetAddress to = new InternetAddress(toAddress);
             msg.setRecipient(Message.RecipientType.TO, to);
-            msg.setSubject("제목", "UTF-8");
-            msg.setText("안녕하세요 테스트 메일입니다.", "UTF-8");
+            msg.setSubject(msgTitle, "UTF-8");
+            msg.setText(msgContent, "UTF-8");
             
             Transport.send(msg);
             
