@@ -39,22 +39,5 @@
     session.setAttribute("userId", userId);
     session.setAttribute("nickname", nickname);
 
-    int queryIdx = preUrl.indexOf("?");
-
-    // 쿼리 파라미터가 있는경우 자르기
-    if (queryIdx != -1) {
-        preUrl = preUrl.substring(0, queryIdx);
-    }
-
-    // .jsp 경로만 가져오기
-    File file = new File(preUrl);
-    preUrl = file.getName();
-    file = null;
-
-    // 현황표 페이지에서 로그인 시도한경우
-    if (preUrl.equals("infectedCountProcessor.jsp")) {
-        preUrl = "infectedCount.jsp";
-    }
-
-    response.sendRedirect(preUrl);
+    response.sendRedirect("infectedCount.jsp");
 %>
