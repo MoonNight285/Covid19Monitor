@@ -45,11 +45,6 @@
         if (psmt != null) { psmt.close(); }
         if (conn != null) { conn.close(); }
     }
-
-    String preUrl = request.getHeader("referer");
-    File file = new File(preUrl);
-    preUrl = file.getName();
-    file = null;
 %>
 
 <html>
@@ -60,6 +55,72 @@
     <link rel="stylesheet" href="css/commonDesign.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function isLogin() {
+            const userNickname = $("#header-user-nickname").text();
+            if (userNickname == "") {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        
+        function isUserCheck() {
+            const loginNickname = "<%=session.getAttribute("nickname")%>";
+            const postingAuhtor = $("#posting-author").val();
+    
+            if (loginNickname == postingAuhtor) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        $(document).ready(function() {
+            const btnUpdateContent = $("#btn-update-content");
+            const btnDeleteContent = $("#btn-delete-content");
+            const btnHidden = $("#btn-hidden");
+            const sendForm = $("#send-form");
+            
+            btnUpdateContent.on("click", function () {
+                if (isLogin() == false) {
+                    sendForm.attr("action", "login.jsp");
+                    sendForm.attr("method", "get");
+                    btnHidden.click();
+                    return;
+                }
+                
+                if (isUserCheck()) {
+                    sendForm.attr("action", "noticeUpdate.jsp");
+                    sendForm.attr("method", "get");
+                    btnHidden.click();
+                } else {
+                    alert("본인이 작성한 글만 수정할수있습니다!");
+                }
+            });
+            
+            btnDeleteContent.on("click", function () {
+                if (isLogin() == false) {
+                    sendForm.attr("action", "login.jsp");
+                    sendForm.attr("method", "get");
+                    btnHidden.click();
+                    return;
+                }
+    
+                if (isUserCheck()) {
+                    if (confirm("정말로 삭제하시겠습니까?")) {
+                        sendForm.attr("action", "noticeDeleteProcessor.jsp");
+                        sendForm.attr("method", "get");
+                        btnHidden.click();
+                    } else {
+                        alert("삭제가 취소되었습니다.");
+                    }
+                } else {
+                    alert("본인이 작성한 글만 삭제할수 있습니다!");
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
@@ -69,61 +130,64 @@
                 <img src="img/advertisement.jpg" style="max-width: 100%; height: auto">
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-sm-2 mx-auto">
-                <form class="form-floating">
-                    <input type="text" class="form-control" id="posting-author" value="<%=postingAuthor%>" readonly>
-                    <label for="posting-author">작성자</label>
-                </form>
-            </div>
-            <div class="col-sm-10 mx-auto">
-                <form class="form-floating">
-                    <input type="text" class="form-control" id="posting-name" value="<%=postingName%>" readonly>
-                    <label for="posting-name">글 제목</label>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-2 mx-auto">
-                <form class="form-floating">
-                    <input type="text" class="form-control" id="posting-number" value="<%=idx%>" readonly>
-                    <label for="posting-number">글 번호</label>
-                </form>
-            </div>
-            <div class="col-sm-2 mx-auto">
-                <form class="form-floating">
-                    <input type="text" class="form-control" id="posting-view-count" value="<%=postingViewCount%>" readonly>
-                    <label for="posting-view-count">조회수</label>
-                </form>
-            </div>
-            <div class="col-sm-4 mx-auto">
-                <form class="form-floating">
-                    <input type="text" class="form-control" id="posting-create-time" value="<%=postingCreateTime%>" readonly>
-                    <label for="posting-create-time">등록시간</label>
-                </form>
-            </div>
-            <div class="col-sm-4 mx-auto">
-                <form class="form-floating">
-                    <input type="text" class="form-control" id="posting-update-time" value="<%=postingUpdateTime%>" readonly>
-                    <label for="posting-update-time">수정시간</label>
-                </form>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-12 mx-auto">
-                <div class="form-floating">
-                    <textarea id="posting-contents" class="form-control" style="height: 350px; resize:none" readonly><%=postingContents%></textarea>
-                    <label for="posting-contents">글 내용</label>
+        <form id="send-form">
+            <div class="row mt-3">
+                <div class="col-sm-2 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="posting-author" value="<%=postingAuthor%>" placeholder="작성자" readonly>
+                        <label for="posting-author">작성자</label>
+                    </div>
+                </div>
+                <div class="col-sm-10 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="posting-name" value="<%=postingName%>" placeholder="글 제목" readonly>
+                        <label for="posting-name">글 제목</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row my-3">
-            <div class="col-sm-12 mx-auto d-flex justify-content-end">
-                <a href="<%=preUrl%>"><button class="btn btn-outline-dark">목록으로</button></a>
-                <button class="btn btn-outline-warning mx-2">수정</button>
-                <button class="btn btn-outline-danger">삭제</button>
+            <div class="row">
+                <div class="col-sm-2 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="posting-number" value="<%=idx%>" name="idx" readonly>
+                        <label for="posting-number">글 번호</label>
+                    </div>
+                </div>
+                <div class="col-sm-2 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="posting-view-count" value="<%=postingViewCount%>" readonly>
+                        <label for="posting-view-count">조회수</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="posting-create-time" value="<%=postingCreateTime%>" readonly>
+                        <label for="posting-create-time">등록시간</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="posting-update-time" value="<%=postingUpdateTime%>" readonly>
+                        <label for="posting-update-time">수정시간</label>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="row mb-3">
+                <div class="col-sm-12 mx-auto">
+                    <div class="form-floating">
+                        <textarea id="posting-contents" class="form-control" style="height: 350px; resize:none" readonly><%=postingContents%></textarea>
+                        <label for="posting-contents">글 내용</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-sm-12 mx-auto d-flex justify-content-end">
+                    <a href="notice.jsp?contentType=FAQ"><button id="btn-back" type="button" class="btn btn-outline-dark">목록으로</button></a>
+                    <button id="btn-update-content" class="btn btn-outline-warning mx-2">수정</button>
+                    <button id="btn-delete-content" type="button" class="btn btn-outline-danger">삭제</button>
+                    <button id="btn-hidden" style="display: none"></button>
+                </div>
+            </div>
+        </form>
         <jsp:include page="footer.jsp"></jsp:include>
     </div>
 </body>
