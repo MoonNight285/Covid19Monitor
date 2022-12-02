@@ -15,16 +15,16 @@
     String query = "";
 
     if (searchTitle != null && contentType.equals("FAQ")) {
-        query = "SELECT idx, posting_name, posting_author, posting_create_time FROM posting " +
+        query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
                 "WHERE posting_type = 'F' AND posting_name LIKE '%" + searchTitle + "%' ";
     } else if (searchTitle == null && contentType.equals("FAQ")) {
-        query = "SELECT idx, posting_name, posting_author, posting_create_time FROM posting " +
+        query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
                 "WHERE posting_type = 'F'";
     } else if (searchTitle != null && contentType.equals("Notice")) {
-        query = "SELECT idx, posting_name, posting_author, posting_create_time FROM posting " +
+        query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
                 "WHERE posting_type = 'N' AND posting_name LIKE '%" + searchTitle + "%' ";
     } else if (searchTitle == null && contentType.equals("Notice")) {
-        query = "SELECT idx, posting_name, posting_author, posting_create_time FROM posting " +
+        query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
                 "WHERE posting_type = 'N'";
     }
 %>
@@ -136,6 +136,7 @@
                             <thead>
                             <tr>
                                 <th>번호</th>
+                                <th>조회수</th>
                                 <th>글 제목</th>
                                 <th>작성자</th>
                                 <th>작성시간</th>
@@ -154,10 +155,12 @@
                                         int idx = rs.getInt("idx");
                                         String postingName = rs.getString("posting_name");
                                         String postingAuthor = rs.getString("posting_author");
+                                        int postingViewCount = rs.getInt("posting_view_count");
                                         String postingCreateTime = rs.getString("posting_create_time");
                             %>
                             <tr onclick="location.href='noticeDetail.jsp?idx=<%=idx%>'" style="cursor: hand">
                                 <td><%=idx%></td>
+                                <td><%=postingViewCount%></td>
                                 <td><%=postingName%></td>
                                 <td><%=postingAuthor%></td>
                                 <td><%=postingCreateTime%></td>

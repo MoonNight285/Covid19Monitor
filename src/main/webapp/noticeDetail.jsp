@@ -22,9 +22,14 @@
     ResultSet rs = null;
     String query = "SELECT posting_name, posting_author, posting_view_count, posting_create_time, " +
             "posting_update_time, posting_contents FROM posting WHERE idx = ? ";
-
-
+    String postingViewCountUpdateQuery = "UPDATE posting SET posting_view_count = posting_view_count + 1 " +
+            "WHERE idx = ? ";
+    
     try {
+        psmt = conn.prepareStatement(postingViewCountUpdateQuery);
+        psmt.setInt(1, idx);
+        psmt.executeUpdate();
+        
         psmt = conn.prepareStatement(query);
         psmt.setInt(1, idx);
         rs = psmt.executeQuery();
