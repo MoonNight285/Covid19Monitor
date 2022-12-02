@@ -140,7 +140,7 @@
                 </div>
                 <div class="col-sm-10 mx-auto">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="posting-name" value="<%=postingName%>" placeholder="글 제목" readonly>
+                        <input type="text" class="form-control" id="posting-name" value="<%=postingName%>" placeholder="글 제목" name="postingName" readonly>
                         <label for="posting-name">글 제목</label>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
             <div class="row mb-3">
                 <div class="col-sm-12 mx-auto">
                     <div class="form-floating">
-                        <textarea id="posting-contents" class="form-control" style="height: 350px; resize:none" readonly><%=postingContents%></textarea>
+                        <textarea id="posting-contents" class="form-control" style="height: 350px; resize:none" name="postingContent" readonly><%=postingContents%></textarea>
                         <label for="posting-contents">글 내용</label>
                     </div>
                 </div>
