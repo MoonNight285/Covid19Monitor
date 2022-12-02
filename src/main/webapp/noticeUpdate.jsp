@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.io.File" %><%--
   Created by IntelliJ IDEA.
   User: kimjy
   Date: 2022-11-27
@@ -6,6 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    String preUrl = request.getHeader("referer");
+    File file = new File(preUrl);
+    preUrl = file.getName();
+    file = null;
+%>
+
 <html>
 <head>
     <title>코로나 모니터 - 게시글 수정</title>
@@ -51,7 +59,7 @@
         </div>
         <div class="row my-3">
             <div class="col-sm-12 mx-auto d-flex justify-content-end">
-                <button class="btn btn-outline-danger mx-2">수정취소</button>
+                <a href="<%=preUrl%>"><button type="button" class="btn btn-outline-danger mx-2">수정취소</button></a>
                 <button class="btn btn-outline-success">수정</button>
             </div>
         </div>
