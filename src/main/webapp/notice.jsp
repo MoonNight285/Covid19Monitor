@@ -56,12 +56,21 @@
                 const searchContent = $("#search-content"); // 검색하는 부분의 input 태그 이름
                 const searchTitle = $("#search-title"); // 파라미터로 넘겨주는 input 태그 이름
                 const pageList = $("#page-list");
-                const jspPageIdx = "<%=pageIdx + 1%>";
+                const jspPageNumber = "<%=pageIdx + 1%>";
                 
                 for (let i = 0; i < pageList.children().length; ++i) {
-                    if (pageList.children().eq(i).text() == jspPageIdx) {
+                    if (pageList.children().eq(i).text() == jspPageNumber) {
                         pageList.children().eq(i).addClass("active");
+                        break;
                     }
+                }
+    
+                if (jspPageNumber == 1) {
+                    pageList.children().first().addClass("disabled");
+                }
+                
+                if (jspPageNumber == pageList.children().eq(pageList.children().length - 2).text()) {
+                    pageList.children().last().addClass("disabled");
                 }
                 
                 if (contentTypeVar == "FAQ") {
@@ -201,6 +210,11 @@
                     <div class="col-sm-12 mx-auto d-flex justify-content-center">
                         <nav>
                             <ul class="pagination" id="page-list">
+                                <li class="page-item">
+                                    <a class="page-link" href="notice.jsp?contentType=<%=contentType%>&pageIdx=<%=pageIdx - 1%>">
+                                        <span>&laquo;</span>
+                                    </a>
+                                </li>
                                 <%
                                     PreparedStatement psmt2 = null;
                                     ResultSet rs2 = null;
@@ -240,6 +254,11 @@
                                 <%
                                     }
                                 %>
+                                <li class="page-item">
+                                    <a class="page-link" href="notice.jsp?contentType=<%=contentType%>&pageIdx=<%=pageIdx + 1%>">
+                                        <span>&raquo;</span>
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
