@@ -27,6 +27,18 @@
     <link rel="stylesheet" href="css/commonDesign.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const btnUpdate = $("#btn-update");
+            const btnHiddenUpdate = $("#btn-hidden-update");
+            
+            btnUpdate.on("click" , function () {
+                if(confirm("정말로 수정하시겠습니까?")) {
+                    btnHiddenUpdate.click();
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
@@ -36,7 +48,7 @@
                 <img src="img/advertisement.jpg" style="max-width: 100%; height: auto">
             </div>
         </div>
-        <form>
+        <form action="noticeUpdateProcessor.jsp" method="post">
             <div class="row mt-5">
                 <div class="col-sm-2 mx-auto">
                     <div class="form-floating">
@@ -49,7 +61,7 @@
                 </div>
                 <div class="col-sm-10 mx-auto">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="posting-name" value="<%=postingName%>">
+                        <input type="text" class="form-control" id="posting-name" value="<%=postingName%>" name="postingName">
                         <label for="posting-name">글 제목</label>
                     </div>
                 </div>
@@ -57,7 +69,7 @@
             <div class="row mb-3">
                 <div class="col-sm-12 mx-auto">
                     <div class="form-floating">
-                        <textarea id="posting-contents" class="form-control" style="height: 400px; resize:none"><%=postingContent%></textarea>
+                        <textarea id="posting-contents" class="form-control" style="height: 400px; resize:none" name="postingContent"><%=postingContent%></textarea>
                         <label for="posting-contents">글 내용</label>
                     </div>
                 </div>
@@ -65,9 +77,11 @@
             <div class="row my-3">
                 <div class="col-sm-12 mx-auto d-flex justify-content-end">
                     <a href="<%=preUrl%>"><button type="button" class="btn btn-outline-danger mx-2">수정취소</button></a>
-                    <button class="btn btn-outline-success">수정</button>
+                    <button id="btn-update" type="button" class="btn btn-outline-success">수정</button>
+                    <button id="btn-hidden-update" type="submit" style="display: none"></button>
                 </div>
             </div>
+            <input type="hidden" name="idx" value="<%=idx%>">
         </form>
         <jsp:include page="footer.jsp"></jsp:include>
     </div>
