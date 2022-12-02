@@ -12,20 +12,27 @@
     request.setCharacterEncoding("UTF-8");
     String contentType = request.getParameter("contentType");
     String searchTitle = request.getParameter("searchTitle");
+    int pageIdx = 0;
+    final int SEARCH_ROW_COUNT = 9;
+    
+    if(request.getParameter("pageIdx") != null) {
+        pageIdx = Integer.parseInt(request.getParameter("pageIdx"));
+    }
+    
     String query = "";
 
     if (searchTitle != null && contentType.equals("FAQ")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
-                "WHERE posting_type = 'F' AND posting_name LIKE '%" + searchTitle + "%' LIMIT 0, 9 ";
+                "WHERE posting_type = 'F' AND posting_name LIKE '%" + searchTitle + "%' LIMIT ?, ? ";
     } else if (searchTitle == null && contentType.equals("FAQ")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
-                "WHERE posting_type = 'F' LIMIT 0, 9 ";
+                "WHERE posting_type = 'F' LIMIT ?, ? ";
     } else if (searchTitle != null && contentType.equals("Notice")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
-                "WHERE posting_type = 'N' AND posting_name LIKE '%" + searchTitle + "%' LIMIT 0, 9 ";
+                "WHERE posting_type = 'N' AND posting_name LIKE '%" + searchTitle + "%' LIMIT ?, ? ";
     } else if (searchTitle == null && contentType.equals("Notice")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
-                "WHERE posting_type = 'N' LIMIT 0, 9 ";
+                "WHERE posting_type = 'N' LIMIT ?, ? ";
     }
 %>
 
@@ -48,7 +55,15 @@
                 const contentTypeVar = "<%=contentType%>"; // 글의 타입을 저장하고있는 JSP 변수를 가져온다.
                 const searchContent = $("#search-content"); // 검색하는 부분의 input 태그 이름
                 const searchTitle = $("#search-title"); // 파라미터로 넘겨주는 input 태그 이름
-
+                const pageList = $("#page-list");
+                const jspPageIdx = "<%=pageIdx + 1%>";
+                
+                for (let i = 0; i < pageList.children().length; ++i) {
+                    if (pageList.children().eq(i).text() == jspPageIdx) {
+                        pageList.children().eq(i).addClass("active");
+                    }
+                }
+                
                 if (contentTypeVar == "FAQ") {
                     btnFAQ.addClass("active");
                 }
@@ -149,6 +164,8 @@
 
                                 try {
                                     psmt = conn.prepareStatement(query);
+                                    psmt.setInt(1, pageIdx * SEARCH_ROW_COUNT);
+                                    psmt.setInt(2, SEARCH_ROW_COUNT);
                                     rs = psmt.executeQuery();
 
                                     while(rs.next()) {
@@ -183,12 +200,7 @@
                 <div class="row">
                     <div class="col-sm-12 mx-auto d-flex justify-content-center">
                         <nav>
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <span>&laquo;</span>
-                                    </a>
-                                </li>
+                            <ul class="pagination" id="page-list">
                                 <%
                                     PreparedStatement psmt2 = null;
                                     ResultSet rs2 = null;
@@ -224,15 +236,10 @@
                                     
                                     for (int i = 0; i < noticeCount / 9 + addNumber; ++i) {
                                 %>
-                                <li class="page-item"><a class="page-link" href="#"><%=i + 1%></a></li>
+                                <li class="page-item"><a class="page-link" href="notice.jsp?contentType=<%=contentType%>&pageIdx=<%=i%>"><%=i + 1%></a></li>
                                 <%
                                     }
                                 %>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <span>&raquo;</span>
-                                    </a>
-                                </li>
                             </ul>
                         </nav>
                     </div>
