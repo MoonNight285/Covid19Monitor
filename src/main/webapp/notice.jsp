@@ -13,6 +13,7 @@
     String contentType = request.getParameter("contentType");
     String searchTitle = request.getParameter("searchTitle");
     String query = "";
+    String noticeCountSelectQuery = "SELECT MOD(COUNT(*),5) FROM posting "; // 한페이지에 최대 5개씩 보여준다.
 
     if (searchTitle != null && contentType.equals("FAQ")) {
         query = "SELECT idx, posting_name, posting_author, posting_view_count, posting_create_time FROM posting " +
@@ -173,7 +174,7 @@
                                 } finally {
                                     if (rs != null) { rs.close(); }
                                     if (psmt != null) { psmt.close(); }
-                                    if (conn != null) { conn.close(); }
+                                    // conn 은 밑에서 close 처리
                                 }
                             %>
                             </tbody>
@@ -185,16 +186,40 @@
                         <nav>
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
+                                    <a class="page-link" href="#">
+                                        <span>&laquo;</span>
                                     </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <%
+                                    PreparedStatement psmt2 = null;
+                                    ResultSet rs2 = null;
+                                    int noticeCount = 0;
+                                    
+                                    try {
+                                        psmt2 = conn.prepareStatement(noticeCountSelectQuery);
+                                        rs2 = psmt2.executeQuery();
+                                        
+                                        if (rs2.next()) {
+                                            noticeCount = rs2.getInt("MOD(COUNT(*),5)");
+                                        }
+                                    } catch (SQLException ex) {
+                                        ex.printStackTrace();
+                                        throw new SQLException();
+                                    } finally {
+                                        if (rs2 != null) { rs2.close(); }
+                                        if (psmt2 != null) { psmt2.close(); }
+                                        if (conn != null) { conn.close(); }
+                                    }
+                                    
+                                    for (int i = 0; i < noticeCount; ++i) {
+                                %>
+                                <li class="page-item"><a class="page-link" href="#"><%=i + 1%></a></li>
+                                <%
+                                    }
+                                %>
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
+                                    <a class="page-link" href="#">
+                                        <span>&raquo;</span>
                                     </a>
                                 </li>
                             </ul>
