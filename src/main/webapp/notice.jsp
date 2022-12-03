@@ -69,7 +69,7 @@
                     pageList.children().first().addClass("disabled");
                 }
                 
-                if (jspPageNumber == pageList.children().eq(pageList.children().length - 2).text()) {
+                if (jspPageNumber == pageList.children().eq(pageList.children().length - 2).text() || pageList.children().length == 2) {
                     pageList.children().last().addClass("disabled");
                 }
                 
@@ -244,11 +244,11 @@
                                     }
                                     
                                     int addNumber = 1; // 한 페이지에 최대 9개 표시되는데 딱 맞춰서 게시물수가 떨어지면 값 보정
-                                    if (noticeCount % 9 == 0) {
+                                    if (noticeCount % SEARCH_ROW_COUNT == 0) {
                                         addNumber = 0;
                                     }
                                     
-                                    for (int i = 0; i < noticeCount / 9 + addNumber; ++i) {
+                                    for (int i = 0; i < noticeCount / SEARCH_ROW_COUNT + addNumber; ++i) {
                                 %>
                                 <li class="page-item"><a class="page-link" href="notice.jsp?contentType=<%=contentType%>&pageIdx=<%=i%>"><%=i + 1%></a></li>
                                 <%
