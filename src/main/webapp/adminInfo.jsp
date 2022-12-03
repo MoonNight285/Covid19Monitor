@@ -80,7 +80,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <button type="button" class="btn btn-dark">유저 정보 수정</button>
+                    <a href="adminEdit.jsp"><button type="button" class="btn btn-dark">유저 정보 수정</button></a>
                 </div>
             </div>
         </div>
