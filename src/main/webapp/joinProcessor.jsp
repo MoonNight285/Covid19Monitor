@@ -30,6 +30,7 @@
         result = psmt.executeUpdate();
     } catch (SQLException ex) {
         ex.printStackTrace();
+        throw ex;
     } finally {
         if (psmt != null) { psmt.close(); }
         if (conn != null) { conn.close(); }

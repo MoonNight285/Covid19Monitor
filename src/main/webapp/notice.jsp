@@ -195,7 +195,7 @@
                                     }
                                 } catch (SQLException ex) {
                                     ex.printStackTrace();
-                                    throw new SQLException();
+                                    throw ex;
                                 } finally {
                                     if (rs != null) { rs.close(); }
                                     if (psmt != null) { psmt.close(); }
@@ -236,7 +236,7 @@
                                         }
                                     } catch (SQLException ex) {
                                         ex.printStackTrace();
-                                        throw new SQLException();
+                                        throw ex;
                                     } finally {
                                         if (rs2 != null) { rs2.close(); }
                                         if (psmt2 != null) { psmt2.close(); }
