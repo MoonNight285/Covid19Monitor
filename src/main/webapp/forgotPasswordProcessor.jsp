@@ -37,7 +37,15 @@
         MailSend ms = new MailSend(email, "임시 비밀번호가 발급되었습니다.", "임시 비밀번호 : " + randomNumber + "\n" +
             "가급적이면 비밀번호를 바꿔서 사용해주시길바랍니다.");
         ms.MailSend();
-        response.sendRedirect("forgotPasswordSuccess.jsp");
+%>
+<jsp:forward page="processSuccessPage.jsp">
+    <jsp:param name="title" value="코로나 모니터 - 메일 전송 완료"/>
+    <jsp:param name="enhanceContent" value="메일"/>
+    <jsp:param name="content" value="이 발송되었습니다."/>
+    <jsp:param name="toHref" value="infectedCount.jsp"/>
+    <jsp:param name="toHrefContent" value="메인으로 이동"/>
+</jsp:forward>
+<%
     } else {
         // 실패
     }
