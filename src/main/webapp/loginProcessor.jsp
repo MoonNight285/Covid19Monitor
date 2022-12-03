@@ -14,10 +14,11 @@
     String autoLogin = request.getParameter("autoLogin"); // 미체크시 null 체크시 on
     String preUrl = request.getParameter("preUrl");
     String nickname = "";
+    String adminUseable = "";
 
     PreparedStatement psmt = null;
     ResultSet rs = null;
-    String query = "SELECT admin_nickname FROM admins WHERE admin_id = ? ";
+    String query = "SELECT admin_nickname, admin_useable FROM admins WHERE admin_id = ? ";
 
     try {
         psmt = conn.prepareStatement(query);
@@ -26,6 +27,13 @@
 
         if (rs.next()) {
             nickname = rs.getString("admin_nickname");
+            adminUseable = rs.getString("admin_useable");
+
+            if (adminUseable.equals("Y")) {
+                adminUseable = "활동중";
+            } else {
+                adminUseable = "정지됨";
+            }
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -38,6 +46,7 @@
 
     session.setAttribute("userId", userId);
     session.setAttribute("nickname", nickname);
+    session.setAttribute("useable", adminUseable);
 
     response.sendRedirect("infectedCount.jsp");
 %>
