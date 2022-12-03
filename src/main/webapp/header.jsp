@@ -12,11 +12,13 @@
     String labelLogin = "관리자 로그인";
     String loginOutPath = "login.jsp";
     String welcome = "";
+    String labelAdminPage = "";
     Object obj = session.getAttribute("nickname");
     if (obj != null) {
         nickname = obj.toString();
         labelLogin = "로그아웃";
         welcome = "님 환영합니다!";
+        labelAdminPage = "관리자 전용 페이지로 이동";
         loginOutPath = "logout.jsp";
     }
 %>
@@ -38,6 +40,9 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" id="user-nickname"><span id="header-user-nickname"><%=nickname%></span><%=welcome%></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="my-page" href="adminInfo.jsp"><%=labelAdminPage%></a>
                             </li>
                             <div class="collapse navbar-collapse" id="data-option">
                                 <ul class="navbar-nav">
