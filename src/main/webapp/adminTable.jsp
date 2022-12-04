@@ -51,6 +51,7 @@
             const joinReject = $(".join-reject");
             const joinOk = $(".join-ok");
             const adminUseableChange = $(".admin-useable-change");
+            const adminRankChange = $(".admin-rank-change");
 
             for (let i = 0; i < pageList.children().length; ++i) {
                 if (pageList.children().eq(i).text() == jspPageNumber) {
@@ -102,6 +103,20 @@
                     const targetUseStatement = $(this).text();
                     $(this).attr("href", "adminUseableChangeProcessor.jsp?id=" + targetId +
                         "&useStatement=" + targetUseStatement);
+                }
+            });
+
+            adminRankChange.on("click", function () {
+                if (jspAdminRank == "일반 관리자") {
+                    alert("일반 관리자는 권한이 없습니다. 특수 관리자에게 문의하세요.");
+                    return;
+                }
+
+                if (confirm("대상 관리자의 등급을 변경하시겠습니까?")) {
+                    const targetId = $(this).attr("href").split("#")[1];
+                    const targetRank = $(this).text();
+                    $(this).attr("href", "adminRankChangeProcessor.jsp?id=" + targetId +
+                        "&rank=" + targetRank);
                 }
             });
         });
@@ -157,7 +172,7 @@
                     <td><%=adminId%></td>
                     <td><%=adminNickname%></td>
                     <td><a class="admin-useable-change" href="#<%=adminId%>"><%=adminUseable%><a/></td>
-                    <td><%=adminRank%></td>
+                    <td><a class="admin-rank-change" href="#<%=adminId%>"><%=adminRank%></a></td>
                 </tr>
                 <%
                     } else {
