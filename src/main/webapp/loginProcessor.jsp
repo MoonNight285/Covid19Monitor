@@ -15,10 +15,11 @@
     String preUrl = request.getParameter("preUrl");
     String nickname = "";
     String adminUseable = "";
+    String adminRank = "";
 
     PreparedStatement psmt = null;
     ResultSet rs = null;
-    String query = "SELECT admin_nickname, admin_useable FROM admins WHERE admin_id = ? ";
+    String query = "SELECT admin_nickname, admin_useable, admin_rank FROM admins WHERE admin_id = ? ";
 
     try {
         psmt = conn.prepareStatement(query);
@@ -28,11 +29,18 @@
         if (rs.next()) {
             nickname = rs.getString("admin_nickname");
             adminUseable = rs.getString("admin_useable");
+            adminRank = rs.getString("admin_rank");
 
             if (adminUseable.equals("Y")) {
                 adminUseable = "활동중";
             } else {
                 adminUseable = "정지됨";
+            }
+
+            if (adminRank.equals("N")) {
+                adminRank = "일반 관리자";
+            } else {
+                adminRank = "특수 관리자";
             }
         }
     } catch (SQLException ex) {
@@ -47,6 +55,7 @@
     session.setAttribute("userId", userId);
     session.setAttribute("nickname", nickname);
     session.setAttribute("useable", adminUseable);
+    session.setAttribute("rank", adminRank);
 
     response.sendRedirect("infectedCount.jsp");
 %>

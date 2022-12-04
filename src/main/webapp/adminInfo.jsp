@@ -74,7 +74,7 @@
             <div class="row mt-3">
                 <div class="col">
                     <p class="my-3"><%=session.getAttribute("nickname").toString()%></p>
-                    <p class="my-3">유저 권한</p>
+                    <p class="my-3"><%=session.getAttribute("rank").toString()%></p>
                     <p class="my-3"><%=session.getAttribute("useable").toString()%></p>
                 </div>
             </div>
