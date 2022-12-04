@@ -47,6 +47,9 @@
         $(document).ready(function () {
             const pageList = $(".page-list");
             const jspPageNumber = "<%=pageIdx + 1%>";
+            const jspAdminRank = "<%=session.getAttribute("rank").toString()%>";
+            const joinReject = $(".join-reject");
+            const joinOk = $(".join-ok");
 
             for (let i = 0; i < pageList.children().length; ++i) {
                 if (pageList.children().eq(i).text() == jspPageNumber) {
@@ -62,6 +65,30 @@
             if (jspPageNumber == pageList.children().eq(pageList.children().length - 2).text() || pageList.children().length == 2) {
                 pageList.children().last().addClass("disabled");
             }
+
+            joinReject.on("click", function () {
+                if (jspAdminRank == "일반 관리자") {
+                    alert("일반 관리자는 권한이 없습니다. 특수 관리자에게 문의하세요.");
+                    return;
+                }
+
+                if (confirm("정말로 거절하시겠습니까?")) {
+                    const targetId = $(this).attr("href").split("#")[1];
+                    $(this).attr("href", "adminJoinRejectProcessor.jsp?id=" + targetId);
+                }
+            });
+
+            joinOk.on("click", function () {
+                if (jspAdminRank == "일반 관리자") {
+                    alert("일반 관리자는 권한이 없습니다. 특수 관리자에게 문의하세요.");
+                    return;
+                }
+
+                if (confirm("정말로 수락하시겠습니까?")) {
+                    const targetId = $(this).attr("href").split("#")[1];
+                    $(this).attr("href", "adminJoinOkProcessor.jsp?id=" + targetId);
+                }
+            });
         });
     </script>
 </head>
@@ -127,7 +154,7 @@
                     <td><%=adminId%></td>
                     <td><%=adminNickname%></td>
                     <td><%=adminApplyTime%></td>
-                    <td><a href="#">승인</a>&nbsp;/&nbsp;<a href="#">거부</a></td>
+                    <td><a class="join-ok" href="#<%=adminId%>">승인</a>&nbsp;/&nbsp;<a class="join-reject" href="#<%=adminId%>">거부</a></td>
                 </tr>
                 <%
                             }
