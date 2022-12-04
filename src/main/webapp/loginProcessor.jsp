@@ -52,10 +52,22 @@
         if (conn != null) { conn.close(); }
     }
 
-    session.setAttribute("userId", userId);
-    session.setAttribute("nickname", nickname);
-    session.setAttribute("useable", adminUseable);
-    session.setAttribute("rank", adminRank);
+    if (adminUseable.equals("활동중")) {
+        session.setAttribute("userId", userId);
+        session.setAttribute("nickname", nickname);
+        session.setAttribute("useable", adminUseable);
+        session.setAttribute("rank", adminRank);
 
-    response.sendRedirect("infectedCount.jsp");
+        response.sendRedirect("infectedCount.jsp");
+    } else {
+%>
+    <jsp:forward page="processFailPage.jsp">
+        <jsp:param name="title" value="코로나 모니터 - 로그인 실패"/>
+        <jsp:param name="enhanceContent" value="정지"/>
+        <jsp:param name="content" value="된 계정입니다. 특수 관리자에게 문의하세요."/>
+        <jsp:param name="toHref" value="infectedCount.jsp"/>
+        <jsp:param name="toHrefContent" value="메인으로 이동"/>
+    </jsp:forward>
+<%
+    }
 %>

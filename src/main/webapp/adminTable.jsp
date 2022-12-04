@@ -50,6 +50,7 @@
             const jspAdminRank = "<%=session.getAttribute("rank").toString()%>";
             const joinReject = $(".join-reject");
             const joinOk = $(".join-ok");
+            const adminUseableChange = $(".admin-useable-change");
 
             for (let i = 0; i < pageList.children().length; ++i) {
                 if (pageList.children().eq(i).text() == jspPageNumber) {
@@ -87,6 +88,20 @@
                 if (confirm("정말로 수락하시겠습니까?")) {
                     const targetId = $(this).attr("href").split("#")[1];
                     $(this).attr("href", "adminJoinOkProcessor.jsp?id=" + targetId);
+                }
+            });
+
+            adminUseableChange.on("click", function () {
+                if (jspAdminRank == "일반 관리자") {
+                    alert("일반 관리자는 권한이 없습니다. 특수 관리자에게 문의하세요.");
+                    return;
+                }
+
+                if (confirm("대상 관리자의 활동 상태를 변경하시겠습니까?")) {
+                    const targetId = $(this).attr("href").split("#")[1];
+                    const targetUseStatement = $(this).text();
+                    $(this).attr("href", "adminUseableChangeProcessor.jsp?id=" + targetId +
+                        "&useStatement=" + targetUseStatement);
                 }
             });
         });
@@ -141,7 +156,7 @@
                 <tr>
                     <td><%=adminId%></td>
                     <td><%=adminNickname%></td>
-                    <td><a href="#"><%=adminUseable%><a/></td>
+                    <td><a class="admin-useable-change" href="#<%=adminId%>"><%=adminUseable%><a/></td>
                     <td><%=adminRank%></td>
                 </tr>
                 <%

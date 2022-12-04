@@ -32,13 +32,13 @@
 
     if (result == 1) {
 %>
-<jsp:forward page="processSuccessPage.jsp">
-    <jsp:param name="title" value="코로나 모니터 - 비밀번호 변경 완료"/>
-    <jsp:param name="enhanceContent" value="비밀번호"/>
-    <jsp:param name="content" value="가 변경되었습니다."/>
-    <jsp:param name="toHref" value="adminInfo.jsp"/>
-    <jsp:param name="toHrefContent" value="관리자 전용 페이지로 이동"/>
-</jsp:forward>
+    <jsp:forward page="processSuccessPage.jsp">
+        <jsp:param name="title" value="코로나 모니터 - 비밀번호 변경 완료"/>
+        <jsp:param name="enhanceContent" value="비밀번호"/>
+        <jsp:param name="content" value="가 변경되었습니다."/>
+        <jsp:param name="toHref" value="adminInfo.jsp"/>
+        <jsp:param name="toHrefContent" value="관리자 전용 페이지로 이동"/>
+    </jsp:forward>
 <%
     } else {
         // 실패

@@ -19,6 +19,10 @@
     color : forestgreen;
 }
 
+#enhance3 {
+    color : red;
+}
+
 .dropdown:hover .dropdown-menu {display:block;}
 
 body {

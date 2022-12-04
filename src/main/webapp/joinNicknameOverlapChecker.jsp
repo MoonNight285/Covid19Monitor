@@ -39,9 +39,9 @@
 
     JsonObject result = new JsonObject();
     if(usedNicknameCount == 0) {
-      result.addProperty("overlap", "false");
+        result.addProperty("overlap", "false");
     } else {
-      result.addProperty("overlap", "true");
+        result.addProperty("overlap", "true");
     }
     out.print(result);
 %>
