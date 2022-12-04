@@ -12,14 +12,14 @@
     request.setCharacterEncoding("UTF-8");
     String tableType = request.getParameter("tableType");
     int pageIdx = Integer.parseInt(request.getParameter("idx"));
-    String th1 = "", th2 = "", th3 = "";
+    String th1 = "", th2 = "", th3 = "", th4 = "";
     String tableName = "";
 
     PreparedStatement psmt = null;
     ResultSet rs = null;
     String query = "";
     String rowCountSelectQuery = "";
-    String adminId = "", adminNickname = "", adminUseable = "", adminApplyTime = "";
+    String adminId = "", adminNickname = "", adminUseable = "", adminApplyTime = "", adminRank = "";
 
     final int SEARCH_ROW_COUNT = 13;
 
@@ -28,14 +28,16 @@
         th1 = "아이디";
         th2 = "닉네임";
         th3 = "활동상태";
-        query = "SELECT admin_id, admin_nickname, admin_useable FROM admins LIMIT ?, ? ";
+        th4 = "권한";
+        query = "SELECT admin_id, admin_nickname, admin_useable, admin_rank FROM admins LIMIT ?, ? ";
         rowCountSelectQuery = "SELECT COUNT(*) FROM admins ";
     } else if (tableType.equals("waitAdmins")) {
         tableName = "신청 대기중인 관리자 목록";
         th1 = "아이디";
-        th2 = "신청시간";
-        th3 = "승인여부";
-        query = "SELECT admin_id, admin_apply_time FROM wait_admins LIMIT ?, ? ";
+        th2 = "닉네임";
+        th3 = "신청시간";
+        th4 = "승인여부";
+        query = "SELECT admin_id, admin_nickname, admin_apply_time FROM wait_admins LIMIT ?, ? ";
         rowCountSelectQuery = "SELECT COUNT(*) FROM wait_admins ";
     }
 %>
@@ -79,6 +81,7 @@
                     <th><%=th1%></th>
                     <th><%=th2%></th>
                     <th><%=th3%></th>
+                    <th><%=th4%></th>
                 </tr>
             </thead>
             <tbody>
@@ -94,25 +97,35 @@
                                 adminId = rs.getString("admin_id");
                                 adminNickname = rs.getString("admin_nickname");
                                 adminUseable = rs.getString("admin_useable");
+                                adminRank = rs.getString("admin_rank");
 
                                 if (adminUseable.equals("Y")) {
                                     adminUseable = "활동중";
                                 } else {
                                     adminUseable = "정지됨";
                                 }
+
+                                if (adminRank.equals("N")) {
+                                    adminRank = "일반 관리자";
+                                } else {
+                                    adminRank = "특수 관리자";
+                                }
                 %>
                 <tr>
                     <td><%=adminId%></td>
                     <td><%=adminNickname%></td>
                     <td><a href="#"><%=adminUseable%><a/></td>
+                    <td><%=adminRank%></td>
                 </tr>
                 <%
                     } else {
                         adminId = rs.getString("admin_id");
+                        adminNickname = rs.getString("admin_nickname");
                         adminApplyTime = rs.getString("admin_apply_time");
                 %>
                 <tr>
                     <td><%=adminId%></td>
+                    <td><%=adminNickname%></td>
                     <td><%=adminApplyTime%></td>
                     <td><a href="#">승인</a>&nbsp;/&nbsp;<a href="#">거부</a></td>
                 </tr>
