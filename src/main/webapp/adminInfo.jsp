@@ -85,7 +85,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <a href="#"><button type="button" class="btn btn-outline-dark">비밀번호 변경</button></a>
+                    <a href="adminPasswordChange.jsp"><button type="button" class="btn btn-outline-dark">비밀번호 변경</button></a>
                 </div>
             </div>
         </div>
