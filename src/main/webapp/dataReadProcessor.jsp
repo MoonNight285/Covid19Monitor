@@ -17,6 +17,23 @@
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.Period" %>
 
+<%!
+    // API를 통해서 가져온 데이터를 클라이언트측으로 전달하기위해 데이터를 가공
+    // dataName : XML 문서에서 얻고자하는 데이터의 태그 이름
+    // result : 데이터 값을 저장할 배열 공간
+    // labelDate : 날짜 값을 저장할 공간
+    // itemNode : XML 문서의 node 값
+    // standardDateString : 날짜 값
+    // idx : 배열 인덱스 번호
+    private void setData(String dataName, String[] result, String[] labelDate, Node itemNode, String standardDateString, int idx) {
+        Element itemNodeElement = (Element) itemNode;
+        NodeList defCntNodeList = itemNodeElement.getElementsByTagName(dataName).item(0).getChildNodes();
+        Node defCntNode = defCntNodeList.item(0);
+        result[idx] = defCntNode.getNodeValue();
+        labelDate[idx] = standardDateString;
+    }
+%>
+
 <%
     String[] result = new String[] {"0", "0", "0", "0", "0"}; // API 통해서 얻어온 결과값
     String[] labelDate = new String[] {"", "", "", "", ""}; // 날짜 정보
@@ -65,11 +82,11 @@
         NodeList item = root.getElementsByTagName("item");
         Node itemNode = item.item(0);
         if(itemNode.getNodeType() == Node.ELEMENT_NODE) {
-            Element itemNodeElement = (Element) itemNode;
-            NodeList defCntNodeList = itemNodeElement.getElementsByTagName("defCnt").item(0).getChildNodes();
-            Node defCntNode = defCntNodeList.item(0);
-            result[i] = defCntNode.getNodeValue();
-            labelDate[i] = standardDateString;
+            if (dataType.equals("누적_확진자_수")) {
+                setData("defCnt", result, labelDate, itemNode, standardDateString, i);
+            } else if (dataType.equals("전일_대비_확진자_증감수")) {
+                setData("incDec", result, labelDate, itemNode, standardDateString, i);
+            }
         }
 
         standardDate.add(Calendar.DATE, 1);

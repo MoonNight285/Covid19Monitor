@@ -90,10 +90,17 @@
         $(document).ready(function () {
             let isFirstClick = true;
             const loading = $("#div_load_image");
-            loading.hide();
-
             const btnHiddenSearch = $("#btnHiddenSearch");
             const btnSearch = $("#search");
+            const bannerWrapper = $("#banner-wrapper");
+            const jspTitle = "<%=title%>";
+
+            loading.hide();
+
+            if (jspTitle == "누적 확진자 수") {
+                bannerWrapper.addClass("col-sm-7 col-md-7 col-lg-5 col-xl-5 col-xxl-4 mx-auto");
+            }
+
             btnSearch.on("click", function () {
                 const startTime = $("#start-time").val();
                 const endTime = $("#end-time").val();
@@ -172,7 +179,7 @@
     <jsp:include page="header.jsp"></jsp:include>
     <div class="container" id="main">
         <div class="row my-5">
-            <div class="col-sm-7 col-md-7 col-lg-5 col-xl-5 col-xxl-4 mx-auto">
+            <div id="banner-wrapper" class="">
                 <h1 class="display-2 banner"><%=title%></h1>
             </div>
         </div>
