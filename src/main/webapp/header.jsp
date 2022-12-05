@@ -61,7 +61,7 @@
                                             데이터 종류
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
-                                            <li><a class="dropdown-item" href="dataView.jsp">누적 확진자 수</a></li>
+                                            <li><a class="dropdown-item" href="dataView.jsp?dataType=누적_확진자_수">누적 확진자 수</a></li>
                                             <li><a class="dropdown-item" href="#">전일 대비 확진자 증감수</a></li>
                                             <li><a class="dropdown-item" href="#">누적 격리 해제수</a></li>
                                             <li><a class="dropdown-item" href="#">격리 중환자 수</a></li>

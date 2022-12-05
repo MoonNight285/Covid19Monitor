@@ -7,9 +7,22 @@
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="utf-8" %>
 
+<%
+    request.setCharacterEncoding("UTF-8");
+    String dataType = request.getParameter("dataType");
+    String title = "";
+
+    if (dataType == null) {
+        title = "누적 확진자 수";
+        dataType = "누적_확진자_수";
+    } else {
+        title = dataType.replaceAll("_", " ");
+    }
+%>
+
 <html>
 <head>
-    <title>코로나 모니터 - 누적 감염자 수</title>
+    <title>코로나 모니터 - <%=title%></title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/commonDesign.css">
@@ -160,7 +173,7 @@
     <div class="container" id="main">
         <div class="row my-5">
             <div class="col-sm-7 col-md-7 col-lg-5 col-xl-5 col-xxl-4 mx-auto">
-                <h1 class="display-2 banner">누적 확진자 수</h1>
+                <h1 class="display-2 banner"><%=title%></h1>
             </div>
         </div>
         <form action="dataReadProcessor.jsp" method="get">
@@ -210,6 +223,7 @@
                     <button id="btnHiddenSearch" type="submit" style="display: none"></button>
                 </div>
             </div>
+            <input type="hidden" name="dataType" value="<%=dataType%>">
         </form>
         <div class="row">
             <div id="row-map" class="col-sm-12 col-lg-3 col-xl-4 col-xxl-4 mx-auto mt-5">

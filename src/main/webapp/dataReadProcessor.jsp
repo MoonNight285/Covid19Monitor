@@ -24,6 +24,7 @@
     String startDate = request.getParameter("startDate");
     String endDate = request.getParameter("endDate");
     String selectedCity = request.getParameter("selectedCity");
+    String dataType = request.getParameter("dataType");
     String serviceKey = "pAR7xB7Uwyh4RcIMj1YNS9nYmjzzbIEm%2BTOpaJa1IxsC%2FB7J96c6jR5lABRfJjfLbB323p8xThlPinRbLSe6pw%3D%3D";
 
     // 받은 날짜 데이터 문자 - 기준으로 자르기
@@ -74,7 +75,7 @@
         standardDate.add(Calendar.DATE, 1);
     }
 %>
-<jsp:forward page="dataView.jsp">
+<jsp:forward page="dataView.jsp?dataType=<%=dataType%>">
     <jsp:param name="data1" value="<%=result[0]%>"/>
     <jsp:param name="data2" value="<%=result[1]%>"/>
     <jsp:param name="data3" value="<%=result[2]%>"/>
