@@ -121,7 +121,7 @@
         });
     </script>
 </head>
-<body id="body">
+<body id="body" style="margin:0px">
     <div class="spinner-border text-dark" id="div_load_image" style="position:absolute; top:45%; left:45%;width:100px;height:100px; z-index:9999; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; text-align:center">
     </div>
     <jsp:include page="header.jsp"></jsp:include>
@@ -181,7 +181,7 @@
                 </jsp:include>
             </div>
         </div>
-        <jsp:include page="footer.jsp"></jsp:include>
     </div>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
