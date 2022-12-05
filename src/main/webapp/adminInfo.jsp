@@ -58,7 +58,8 @@
     </script>
     <style>
         p {
-            font-size: 36px;
+            font-size: 50px;
+            font-family: BlackHanSans;
         }
     </style>
 </head>
@@ -80,12 +81,12 @@
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <a href="adminEdit.jsp"><button type="button" class="btn btn-outline-dark">유저정보 수정</button></a>
+                    <a href="adminEdit.jsp"><button type="button" class="btn btn-outline-dark">관리자정보 수정</button></a>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <a href="adminPasswordChange.jsp"><button type="button" class="btn btn-outline-dark">비밀번호 변경</button></a>
+                    <a href="adminPasswordChange.jsp"><button type="button" class="btn btn-outline-dark">비밀번호를 변경</button></a>
                 </div>
             </div>
         </div>
@@ -108,6 +109,9 @@
                 <button type="submit" id="btn-hidden-table-change" style="display: none"></button>
             </form>
         </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row my-5"></div>
     </div>
     <jsp:include page="footer.jsp"></jsp:include>
 </body>
