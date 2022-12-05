@@ -25,12 +25,17 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        .navbar-nav .nav-item .nav-link:hover, #data-option:hover .navbar-nav .nav-item .nav-link {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <nav class="navbar navbar-expand-sm bg-white navbar-white">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="infectedCount.jsp"><span id="web-title"><span id="enhance1">코로나</span> 모니터</span></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
@@ -50,7 +55,7 @@
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             데이터 종류
                                         </a>
-                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
                                             <li><a class="dropdown-item" href="infectedCount.jsp">누적 확진자 수</a></li>
                                             <li><a class="dropdown-item" href="#">전일 대비 확진자 증감수</a></li>
                                             <li><a class="dropdown-item" href="#">누적 격리 해제수</a></li>
@@ -73,6 +78,9 @@
                 </div>
             </nav>
         </div>
+    </div>
+    <div class="row">
+        <hr>
     </div>
 </div>
 </body>

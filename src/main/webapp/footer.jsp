@@ -6,13 +6,39 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="row">
-    <div class="col-sm-12 mx-auto d-flex justify-content-center">
-        <h3 id="admin-tel">연락처</h3>
+<head>
+    <style>
+        #footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+        }
+        #footer ul {
+            list-style: none;
+        }
+        #footer ul li {
+            display: inline-block;
+            padding: 0px 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" id="footer">
+        <div class="row">
+            <hr class="mb-0">
+        </div>
+        <div class="row my-2"></div>
+        <div class="row mt-0">
+            <div class="col d-flex justify-content-center">
+                <ul>
+                    <li>담당자 : XXX</li>
+                    <li>전화번호 : 010-1111-2222</li>
+                    <li>제작 : XXXXX</li>
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-12 mx-auto d-flex justify-content-center">
-        <h4 id="admin-tel-num">010-1234-5678</h4>
-    </div>
-</div>
+</body>
+
