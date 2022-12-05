@@ -120,47 +120,98 @@
             });
         });
     </script>
+    <style>
+        @media screen and (max-width: 2000px) {
+            #selected-city2 {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            #selected-city, #selected-city-label, #row-map {
+                display: none;
+            }
+
+            #selected-city2, #search-button {
+                display: flex;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            #selected-city, #selected-city-label, #row-map {
+                display: none;
+            }
+
+            #selected-city2, #search-button {
+                display: flex;
+            }
+
+            .banner {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-<body id="body" style="margin:0px">
+<body id="body" style="margin:0px; height: auto">
     <div class="spinner-border text-dark" id="div_load_image" style="position:absolute; top:45%; left:45%;width:100px;height:100px; z-index:9999; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; text-align:center">
     </div>
     <jsp:include page="header.jsp"></jsp:include>
     <div class="container" id="main">
         <div class="row my-5">
-            <div class="col-sm-7 col-md-6 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
+            <div class="col-sm-7 col-md-7 col-lg-5 col-xl-5 col-xxl-4 mx-auto">
                 <h1 class="display-2 banner">누적 확진자 수</h1>
             </div>
         </div>
         <form action="infectedCountProcessor.jsp" method="get">
             <div class="row mb-2">
-                <div class="col-lg-4 col-xl-4 col-xxl-4"></div>
-                <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
+                <div class="col-xl-4 col-xxl-4"></div>
+                <div class="col-sm-12 col-md-10 col-lg-7 col-xl-2 col-xxl-2 mx-auto">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="selected-city" name="selectedCity"
                                value="<%=request.getParameter("selectedCity")%>" readonly>
-                        <label for="selected-city">선택한 시도명</label>
+                        <label id="selected-city-label" for="selected-city">선택한 시도명</label>
                     </div>
+                    <select id="selected-city2" class="form-select mb-3 justify-content-start" name="selectedCity2">
+                        <option selected>시도선택</option>
+                        <option>서울</option>
+                        <option>경기</option>
+                        <option>인천</option>
+                        <option>강원</option>
+                        <option>충북</option>
+                        <option>충남</option>
+                        <option>대전</option>
+                        <option>세종</option>
+                        <option>광주</option>
+                        <option>전북</option>
+                        <option>전남</option>
+                        <option>경북</option>
+                        <option>경남</option>
+                        <option>대구</option>
+                        <option>부산</option>
+                        <option>울산</option>
+                        <option>제주</option>
+                    </select>
                 </div>
-                <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
+                <div class="col-sm-12 col-md-10 col-lg-7 col-xl-2 col-xxl-2 mx-auto">
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control" id="start-time" name="startDate" value="<%=request.getParameter("startDate")%>">
                         <label for="start-time">조회 시작시간</label>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2 mx-auto">
+                <div class="col-sm-12 col-md-10 col-lg-7 col-xl-2 col-xxl-2 mx-auto">
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control" id="end-time" name="endDate" value="<%=request.getParameter("endDate")%>">
                         <label class="form-label" for="end-time">조회 종료시간</label>
                     </div>
                 </div>
-                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 mt-2 mx-auto">
+                <div id="search-button" class="col-sm-2 col-md-10 col-lg-7 col-xl-2 col-xxl-2 mt-2 justify-content-center mx-auto">
                     <button id="search" type="button" class="btn btn-outline-dark">조회</button>
                     <button id="btnHiddenSearch" type="submit" style="display: none"></button>
                 </div>
             </div>
         </form>
         <div class="row">
-            <div class="col-sm-12 col-lg-3 col-xl-4 col-xxl-4 mx-auto mt-5">
+            <div id="row-map" class="col-sm-12 col-lg-3 col-xl-4 col-xxl-4 mx-auto mt-5">
                 <jsp:include page="map.jsp"></jsp:include>
             </div>
             <div class="col-sm-12 col-lg-9 col-xl-8 col-xxl-8 mx-auto mb-5">
@@ -181,6 +232,7 @@
                 </jsp:include>
             </div>
         </div>
+        <div class="row my-4"></div>
     </div>
     <jsp:include page="footer.jsp"></jsp:include>
 </body>

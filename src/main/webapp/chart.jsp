@@ -23,7 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div style="max-width: 900px; height: 475px">
+    <div style="max-width: 900px; height: 100%">
         <canvas id="myChart"></canvas>
     </div>
     <input id="data1" type="hidden" value='<%=request.getParameter("data1")%>'>
