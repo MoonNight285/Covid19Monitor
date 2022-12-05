@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="utf-8" %>
+
 <html>
 <head>
     <title>코로나 모니터 - 누적 감염자 수</title>
@@ -162,7 +163,7 @@
                 <h1 class="display-2 banner">누적 확진자 수</h1>
             </div>
         </div>
-        <form action="infectedCountProcessor.jsp" method="get">
+        <form action="dataReadProcessor.jsp" method="get">
             <div class="row mb-2">
                 <div class="col-xl-4 col-xxl-4"></div>
                 <div class="col-sm-12 col-md-10 col-lg-7 col-xl-2 col-xxl-2 mx-auto">

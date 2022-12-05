@@ -74,7 +74,7 @@
         standardDate.add(Calendar.DATE, 1);
     }
 %>
-<jsp:forward page="infectedCount.jsp">
+<jsp:forward page="dataView.jsp">
     <jsp:param name="data1" value="<%=result[0]%>"/>
     <jsp:param name="data2" value="<%=result[1]%>"/>
     <jsp:param name="data3" value="<%=result[2]%>"/>

@@ -58,7 +58,7 @@
         session.setAttribute("useable", adminUseable);
         session.setAttribute("rank", adminRank);
 
-        response.sendRedirect("infectedCount.jsp");
+        response.sendRedirect("dataView.jsp");
     } else {
 %>
     <jsp:forward page="processFailPage.jsp">
