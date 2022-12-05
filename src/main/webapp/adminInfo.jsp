@@ -64,7 +64,7 @@
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between" id="main">
         <div class="container mt-5 text-center">
             <div class="row">
                 <div class="col">
@@ -109,8 +109,6 @@
             </form>
         </div>
     </div>
-    <div class="container">
-        <jsp:include page="footer.jsp"></jsp:include>
-    </div>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -125,7 +125,7 @@
     <div class="spinner-border text-dark" id="div_load_image" style="position:absolute; top:45%; left:45%;width:100px;height:100px; z-index:9999; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; text-align:center">
     </div>
     <jsp:include page="header.jsp"></jsp:include>
-    <div class="container">
+    <div class="container" id="main">
         <div class="row my-5">
             <div class="col-sm-7 col-md-6 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
                 <h1 class="display-2 banner">누적 확진자 수</h1>

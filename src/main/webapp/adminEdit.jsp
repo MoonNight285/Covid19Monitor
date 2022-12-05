@@ -65,7 +65,7 @@
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
-    <div class="container">
+    <div class="container" id="main">
         <div class="row my-5"></div>
         <div class="row mt-5">
             <div class="col-sm-6 mx-auto">

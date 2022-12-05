@@ -13,6 +13,8 @@
             bottom: 0;
             width: 100%;
             height: 60px;
+            background-color: white;
+            z-index: 1000;
         }
         #footer ul {
             list-style: none;

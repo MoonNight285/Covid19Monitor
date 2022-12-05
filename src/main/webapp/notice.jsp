@@ -131,7 +131,7 @@
     <body>
         <form id="send-form">
             <jsp:include page="header.jsp"></jsp:include>
-            <div class="container">
+            <div class="container" id="main">
                 <div class="row mt-5">
                     <div class="col-sm-12 mx-auto">
                         <h1 class="display-3 banner text-center"><span id="">도움이</span></h1>
@@ -263,8 +263,8 @@
                         </nav>
                     </div>
                 </div>
-                <jsp:include page="footer.jsp"></jsp:include>
             </div>
+            <jsp:include page="footer.jsp"></jsp:include>
             <input id="content-type" name="contentType" type="hidden">
             <input id="search-title" name="searchTitle" type="hidden">
         </form>

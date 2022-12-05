@@ -29,10 +29,15 @@
         .navbar-nav .nav-item .nav-link:hover, #data-option:hover .navbar-nav .nav-item .nav-link {
             color: red;
         }
+        #header {
+            top: 0;
+            position: fixed;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" id="header">
     <div class="row">
         <div class="col">
             <nav class="navbar navbar-expand-sm bg-white navbar-white">

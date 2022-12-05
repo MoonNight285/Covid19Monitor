@@ -129,7 +129,7 @@
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
-    <div class="container">
+    <div class="container" id="main">
         <div class="row mt-5">
             <div class="col-sm-12 mx-auto d-flex justify-content-center">
                 <img src="img/advertisement.jpg" style="max-width: 100%; height: auto">
@@ -193,7 +193,7 @@
                 </div>
             </div>
         </form>
-        <jsp:include page="footer.jsp"></jsp:include>
     </div>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
