@@ -63,7 +63,7 @@
         data: {
             labels: [date1, date2, date3, date4, date5],
             datasets: [{
-                label: "누적 확진자 수(" + city + ")",
+                label: city,
                 data: [data1, data2, data3, data4, data5],
                 borderWidth: 1
             }]
