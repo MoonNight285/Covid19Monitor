@@ -60,7 +60,7 @@
                     <label for="search-date">조회날짜 선택</label>
                 </div>
             </div>
-            <div id="search-area" class="col-sm-12 col-xl-2 justify-content-center">
+            <div id="search-area" class="col-sm-12 col-xl-2 justify-content-center align-self-center">
                 <button id="btn-search" type="button" class="btn btn-outline-dark">조회</button>
                 <button id="btnHiddenSearch" type="submit" style="display: none"></button>
             </div>
