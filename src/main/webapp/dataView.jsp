@@ -173,21 +173,21 @@
     </script>
     <style>
         @media screen and (max-width: 1200px) {
-            #selected-city, #selected-city-label, #row-map {
+            #row-map {
                 display: none;
             }
 
-            #selected-city2, #search-button {
+            #search-button {
                 display: flex;
             }
         }
 
         @media screen and (max-width: 600px) {
-            #selected-city, #selected-city-label, #row-map {
+            #row-map {
                 display: none;
             }
 
-            #selected-city2, #search-button {
+            #search-button {
                 display: flex;
             }
 
