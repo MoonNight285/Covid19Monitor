@@ -14,9 +14,31 @@
 
     if (dataType == null) {
         title = "누적 확진자 수";
-        dataType = "누적_확진자_수";
+        dataType = "defCnt";
     } else {
-        title = dataType.replaceAll("_", " ");
+        switch (dataType) {
+            case "defCnt" :
+                title = "누적 확진자 수";
+                break;
+            case "incDec" :
+                title = "전일 대비 확진자 증감수";
+                break;
+            case "isolClearCnt" :
+                title = "누적 격리 해제수";
+                break;
+            case "isolIngCnt" :
+                title = "격리 중환자 수";
+                break;
+            case "localOccCnt" :
+                title = "지역 발생수";
+                break;
+            case "overFlowCnt" :
+                title = "해외 유입수";
+                break;
+            case "qurRate" :
+                title = "만명당 발생률";
+                break;
+        }
     }
 %>
 

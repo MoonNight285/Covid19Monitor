@@ -82,11 +82,7 @@
         NodeList item = root.getElementsByTagName("item");
         Node itemNode = item.item(0);
         if(itemNode.getNodeType() == Node.ELEMENT_NODE) {
-            if (dataType.equals("누적_확진자_수")) {
-                setData("defCnt", result, labelDate, itemNode, standardDateString, i);
-            } else if (dataType.equals("전일_대비_확진자_증감수")) {
-                setData("incDec", result, labelDate, itemNode, standardDateString, i);
-            }
+            setData(dataType, result, labelDate, itemNode, standardDateString, i);
         }
 
         standardDate.add(Calendar.DATE, 1);
