@@ -210,7 +210,7 @@
         <form action="dataReadProcessor.jsp" method="get">
             <div class="row mb-2">
                 <div class="col-xl-4 col-xxl-4"></div>
-                <div class="col-sm-12 col-md-10 col-lg-7 col-xl-2 col-xxl-2 mx-auto">
+                <div class="col-sm-12 col-md-10 col-lg-7 col-xl-2 col-xxl-2 mx-auto d-flex">
                     <select id="selected-city" class="form-select mb-3" name="selectedCity">
                         <option selected>시도선택</option>
                         <option>서울</option>
