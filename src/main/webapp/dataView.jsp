@@ -97,8 +97,16 @@
 
             loading.hide();
 
-            if (jspTitle == "누적 확진자 수") {
-                bannerWrapper.addClass("col-sm-7 col-md-7 col-lg-5 col-xl-5 col-xxl-4 mx-auto");
+            if (jspTitle == "누적 확진자 수" || jspTitle == "격리 중환자 수") {
+                bannerWrapper.addClass("col-sm-8 col-md-7 col-lg-6 col-xl-5 col-xxl-4 mx-auto");
+            } else if (jspTitle == "전일 대비 확진자 증감수") {
+                bannerWrapper.addClass("col-sm-12 col-md-11 col-lg-9 col-xl-8 col-xxl-7 mx-auto");
+            } else if (jspTitle == "누적 격리 해제수") {
+                bannerWrapper.addClass("col-sm-9 col-md-8 col-lg-6 col-xl-6 col-xxl-5 mx-auto");
+            } else if (jspTitle == "지역 발생수" || jspTitle == "해외 유입수") {
+                bannerWrapper.addClass("col-sm-6 col-md-6 col-lg-5 col-xl-4 col-xxl-4 mx-auto");
+            } else if (jspTitle == "만명당 발생률") {
+                bannerWrapper.addClass("col-sm-7 col-md-6 col-lg-5 col-xl-5 col-xxl-4 mx-auto");
             }
 
             btnSearch.on("click", function () {
