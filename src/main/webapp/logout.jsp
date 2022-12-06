@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-auto mx-auto">
-                <a href="dataView.jsp?dataType=누적_확진자_수"><button class="btn btn-dark" type="button">메인으로 이동</button></a>
+                <a href="dataView.jsp"><button class="btn btn-dark" type="button">메인으로 이동</button></a>
             </div>
         </div>
     </div>

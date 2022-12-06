@@ -42,7 +42,7 @@
         <jsp:param name="title" value="코로나 모니터 - 메일 전송 완료"/>
         <jsp:param name="enhanceContent" value="메일"/>
         <jsp:param name="content" value="이 발송되었습니다."/>
-        <jsp:param name="toHref" value="infectedCount.jsp"/>
+        <jsp:param name="toHref" value="dataView.jsp"/>
         <jsp:param name="toHrefContent" value="메인으로 이동"/>
     </jsp:forward>
 <%
