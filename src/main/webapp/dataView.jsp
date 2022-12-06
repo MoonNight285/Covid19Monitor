@@ -172,12 +172,6 @@
         });
     </script>
     <style>
-        @media screen and (max-width: 2000px) {
-            #selected-city2 {
-                display: none;
-            }
-        }
-
         @media screen and (max-width: 1200px) {
             #selected-city, #selected-city-label, #row-map {
                 display: none;
@@ -217,12 +211,7 @@
             <div class="row mb-2">
                 <div class="col-xl-4 col-xxl-4"></div>
                 <div class="col-sm-12 col-md-10 col-lg-7 col-xl-2 col-xxl-2 mx-auto">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="selected-city" name="selectedCity"
-                               value="<%=request.getParameter("selectedCity")%>" readonly>
-                        <label id="selected-city-label" for="selected-city">선택한 시도명</label>
-                    </div>
-                    <select id="selected-city2" class="form-select mb-3 justify-content-start" name="selectedCity2">
+                    <select id="selected-city" class="form-select mb-3" name="selectedCity">
                         <option selected>시도선택</option>
                         <option>서울</option>
                         <option>경기</option>

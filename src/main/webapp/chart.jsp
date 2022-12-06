@@ -38,7 +38,7 @@
     <input id="date4" type="hidden" value="<%=dates[3]%>">
     <input id="date5" type="hidden" value="<%=dates[4]%>">
 
-    <input id="selected-city" type="hidden" value="<%=request.getParameter("selectedCity")%>">
+    <input id="selected-city-value" type="hidden" value="<%=request.getParameter("selectedCity")%>">
 </body>
 
 <script>
@@ -56,7 +56,7 @@
     const date4 = document.getElementById('date4').value;
     const date5 = document.getElementById('date5').value;
 
-    const city = document.getElementById('selected-city').value;
+    const city = document.getElementById('selected-city-value').value;
 
     new Chart(ctx, {
         type: 'bar',
