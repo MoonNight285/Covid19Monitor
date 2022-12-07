@@ -47,6 +47,14 @@
     </jsp:forward>
 <%
     } else {
-        // 실패
+%>
+    <jsp:forward page="processFailPage.jsp">
+        <jsp:param name="title" value="코로나 모니터 - 메일 전송 실패"/>
+        <jsp:param name="enhanceContent" value="메일 전송"/>
+        <jsp:param name="content" value="에 실패하였습니다.."/>
+        <jsp:param name="toHref" value="dataView.jsp"/>
+        <jsp:param name="toHrefContent" value="메인으로 이동"/>
+    </jsp:forward>
+<%
     }
 %>

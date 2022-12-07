@@ -46,6 +46,14 @@
     if (result == 1) {
         response.sendRedirect("notice.jsp?contentType=FAQ");
     } else {
-        // 실패
+%>
+    <jsp:forward page="processFailPage.jsp">
+        <jsp:param name="title" value="코로나 모니터 - 게시글 수정 실패"/>
+        <jsp:param name="enhanceContent" value="게시글 수정"/>
+        <jsp:param name="content" value="에 실패하였습니다.."/>
+        <jsp:param name="toHref" value="notice.jsp?contentType=FAQ"/>
+        <jsp:param name="toHrefContent" value="FAQ & 공지사항으로 이동"/>
+    </jsp:forward>
+<%
     }
 %>

@@ -44,6 +44,14 @@
     </jsp:forward>
 <%
     } else {
-        // 실패..
+%>
+    <jsp:forward page="processFailPage.jsp">
+        <jsp:param name="title" value="코로나 모니터 - 수정 실패"/>
+        <jsp:param name="enhanceContent" value="수정"/>
+        <jsp:param name="content" value="에 실패하였습니다.."/>
+        <jsp:param name="toHref" value="adminInfo.jsp"/>
+        <jsp:param name="toHrefContent" value="관리자 전용 페이지로"/>
+    </jsp:forward>
+<%
     }
 %>
