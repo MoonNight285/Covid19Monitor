@@ -63,7 +63,14 @@
     standardDate.set(Integer.parseInt(tempStartDate[0]), Integer.parseInt(tempStartDate[1]), Integer.parseInt(tempStartDate[2]));
 
     for(int i = 0; i <= addDays; ++i) {
-        String standardDateString = String.format("%04d-%02d-%02d", standardDate.get(Calendar.YEAR), standardDate.get(Calendar.MONTH), standardDate.get(Calendar.DATE));
+        String standardDateString = "";
+        
+        if (standardDate.get(Calendar.MONTH) == 0) { // 12월인경우 0으로 나온다..
+            // YEAR 값이 +1 적용되기때문에 -1처리, DATE는 그대로 나옴
+            standardDateString = String.format("%04d-%02d-%02d", standardDate.get(Calendar.YEAR) - 1, 12, standardDate.get(Calendar.DATE));
+        } else { // 1 ~ 11월
+            standardDateString = String.format("%04d-%02d-%02d", standardDate.get(Calendar.YEAR), standardDate.get(Calendar.MONTH), standardDate.get(Calendar.DATE));
+        }
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1352000/ODMS_COVID_04/callCovid04Api"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + serviceKey); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
