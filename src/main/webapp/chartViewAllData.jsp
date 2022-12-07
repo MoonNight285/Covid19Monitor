@@ -6,6 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    request.setCharacterEncoding("UTF-8");
+    String cityName = request.getParameter("cityName"); // 선택한 도시이름
+    String incDec = request.getParameter("incDecValue"); // 전일 대비 확진자 증감수
+    String isolIngCnt = request.getParameter("isolIngCntValue"); // 격리 중환자 수
+    String localOccCnt = request.getParameter("localOccCntValue"); // 지역 발생수
+    String overFlowCnt = request.getParameter("overFlowCntValue"); // 해외 유입수
+    String deathCnt = request.getParameter("deathCntValue"); // 누적 사망자
+%>
+
 <html>
 <head>
     <title>코로나 모니터 - 모든 데이터 한눈에 보기</title>
@@ -22,17 +33,17 @@
 
     const data = {
         labels: [
-            'Eating',
-            'Drinking',
-            'Sleeping',
-            'Designing',
-            'Coding',
-            'Cycling',
-            'Running'
+            '전일 대비 확진자 증감수',
+            '지역 발생수',
+            '누적 사망자',
+            '격리 중환자 수',
+            '해외 유입수',
+            '추가 예정',
+            '추가 예정'
         ],
         datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 90, 81, 56, 55, 40],
+            label: "<%=cityName%>",
+            data: ["<%=incDec%>", "<%=localOccCnt%>", "<%=deathCnt%>", "<%=overFlowCnt%>", "<%=isolIngCnt%>", "0", "0"],
             fill: true,
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgb(255, 99, 132)',
@@ -40,16 +51,6 @@
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgb(255, 99, 132)'
-        }, {
-            label: 'My Second Dataset',
-            data: [28, 48, 40, 19, 96, 27, 100],
-            fill: true,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgb(54, 162, 235)',
-            pointBackgroundColor: 'rgb(54, 162, 235)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgb(54, 162, 235)'
         }]
     };
 
