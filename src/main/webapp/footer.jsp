@@ -36,8 +36,8 @@
             <div class="col d-flex justify-content-center">
                 <ul>
                     <li>담당자 : XXX</li>
-                    <li>전화번호 : 010-1111-2222</li>
-                    <li>제작 : XXXXX</li>
+                    <li>전화번호 : 010-XXXX-XXXX</li>
+                    <li>제작 : 김준영</li>
                 </ul>
             </div>
         </div>
